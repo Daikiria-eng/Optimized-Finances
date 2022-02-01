@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(90deg, #020024 4%, #090979 13%, #00d4ff 67%);
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.main {
+  justify-content: center;
+  margin: 10vw 20vw;
+}
+
+#user_utilities {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#user_utilities {
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.4);
+}
+#user_utilities #user_items {
+  list-style: none;
+}
+#user_utilities li {
+  padding: 10px 17px;
+  margin: 10px 17px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+#user_utilities li:hover {
+  cursor: pointer;
+  background: cadetblue;
+}
+
+/*# sourceMappingURL=ppal.css.map */

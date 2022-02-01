@@ -1,0 +1,137 @@
+.header{
+    width: 100%;
+    height: 75px;
+    background: #1a2537;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.4);
+}
+
+.container1{
+    width: 95%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.logo{
+    float: left;
+    line-height: 45px;
+}
+
+.logo h1{
+    color: white;
+    font-weight: 300;
+    font-size: 24px;
+    cursor: default;   
+}
+
+.menu{
+    float: right;
+    line-height: 75px;
+}
+
+.menu a{
+    color: white;
+    text-decoration: none;
+    display: inline;
+    padding: 10px 15px;
+    line-height: normal;
+    transition: all 500ms ease;
+    border-bottom: 4px solid transparent;
+}
+
+.menu a:hover{
+    color: #40de32;
+    border-bottom: 4px solid #40de32 ;
+}
+
+body{
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 4%, rgba(9,9,121,1) 13%, rgba(0,212,255,1) 67%);
+}
+
+*{
+    box-sizing: border-box;
+}
+
+.container{
+    width: 100%;
+    padding: 15px;
+}
+
+.formulario{
+    background: #fff;
+    margin-top: 150px;
+    padding: 3px;
+}
+
+h1{
+    text-align: center;
+    color: #1a2537;
+    font-size: 40px;
+}
+h2{
+    text-align: center;
+    color: #1a2537;
+    font-size: 40px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"]{
+    font-size: 20px;
+    width: 82%;
+    padding: 10px;
+    border: none;
+}
+
+.input-container{
+    margin-bottom: 20px;
+    border: 1px solid rgb(3, 3, 3);
+}
+
+.icon{
+    min-width: 50px;
+    text-align: center;
+    color: #999;
+}
+
+.button{
+    border: none;
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    background: #1a2537;
+    padding: 15px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover{
+    background: cadetblue;
+}
+
+p{
+    text-align: center;
+}
+
+.link{
+    text-decoration: none;
+    color: #1a2537;
+    font-weight: 600;
+}
+
+.link:hover{
+    color: cadetblue;
+}
+
+@media(min-width:768px) {
+    .formulario{
+        margin: auto;
+        width: 500px;
+        margin-top: 150px;
+        border-radius: 2%;
+    }
+}
