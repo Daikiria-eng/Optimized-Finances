@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #cccccc;
+}
+
+input {
+  padding: 10px 15px;
+  margin: 10px;
+  background-color: #cccccc;
+  border-radius: 5px;
+  border: none;
+  padding: 1.2vw !important;
+}
+input[type=button], input[type=submit] {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  color: white;
+  background-color: #1a2537;
+  border-radius: 5px;
+}
+input[type=button]:hover, input[type=submit]:hover {
+  cursor: pointer;
+  background: #cccccc;
+  color: black;
+}
+input[type=text]:focus, input[type=number]:focus, input[type=password]:focus {
+  border-radius: 5px;
+  border-bottom: 1.5px #1a2537 solid;
+}
+
+section {
+  margin: 4vw 10vw;
+  padding: 3vw 5vw;
+  background-color: white;
+  border-radius: 19px;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.4);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+/*# sourceMappingURL=metas_Objetivos.css.map */

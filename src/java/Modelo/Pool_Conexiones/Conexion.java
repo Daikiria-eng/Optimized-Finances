@@ -3,12 +3,12 @@ package Modelo.Pool_Conexiones;
 import java.sql.*;
 
 public class Conexion {
+    /*private static final String JDBC_URL = ("jdbc:mysql://localhost:3306/optimizedfinances?useSSL=false&serverTimezone=UTC");
+    private static final String JDBC_USER = "root";
+    private static final String JDBC_PASS = "1005680301";*/
     private static final String JDBC_URL = ("jdbc:mysql://localhost:3306/optimizedfinances?useSSL=false&serverTimezone=UTC");
     private static final String JDBC_USER = "root";
-    private static final String JDBC_PASS = "1005680301";
-//    private static final String JDBC_URL = ("jdbc:mysql://localhost:3306/optimizedfinances?useSSL=false&serverTimezone=UTC");
-//    private static final String JDBC_USER = "root";
-//    private static final String JDBC_PASS = "mysql";
+    private static final String JDBC_PASS = "mysql";
     
     public static Connection getConnection() throws ClassNotFoundException {
         Connection con = null;

@@ -19,10 +19,9 @@
             <div class="utilities" id="user_utilities">
                 <h2 >Usuario</h2 ><br/>
                 <ol id="user_items">
-                    <a href="cash.html"><li>Dinero</li></a>
-                    <a href="calendar.html"><li>Calendario</li></a>
+                    <a href="dinero.jsp"><li>Dinero</li></a>
                     <a href="metas_Objetivos.jsp"><li>Metas</li></a>
-                    <a href="advise.html"><li>tips</li></a>
+                    <a href="consejos.jsp"><li>Consejos</li></a>
                     <hr/>
                     <li>Cerrar sesión</li>
                 </ol>

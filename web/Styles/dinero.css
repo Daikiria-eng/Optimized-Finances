@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: white;
+}
+
+#corpse {
+  margin: 5vw 10vw;
+  justify-content: center;
+}
+
+#cash_div {
+  padding: 2vw 7vw;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.4);
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+  border-radius: 10px;
+}
+
+#my_cash {
+  padding: 23px;
+  border-radius: 10px;
+  margin: 5vw 2vw;
+  background-color: #cccccc;
+  grid-row: 1/2;
+  grid-column: 1/4;
+}
+
+#prev_subtract_div {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+#prev_subtract_arrow {
+  border: solid black;
+  border-width: 0 5px 5px 0;
+  display: inline-block;
+  padding: 4px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+#next_subtract_div {
+  grid-column: 3/4;
+  grid-row: 2/3;
+}
+#next_subtract_arrow {
+  border: solid black;
+  border-width: 0 5px 5px 0;
+  display: inline-block;
+  padding: 4px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+/*# sourceMappingURL=dinero.css.map */
