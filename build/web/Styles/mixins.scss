@@ -1,3 +1,4 @@
+@use 'variables' as v;
 
 @mixin body_style($background_p){
     margin: 0;
@@ -20,14 +21,83 @@
 
     @return $aw_direction;
 }
-@mixin arrow{
-    border: solid white;
+@mixin arrow($direction, $color){
+    border: solid $color;
     border-width: 0 5px 5px 0;
     display: inline-block;
     padding: 4px;
+
+    @include arrow_direction($direction);
 }
 @mixin arrow_direction($direction){
     transform: rotate(set_arrow($direction));
     -webkit-transform: rotate(set_arrow($direction));
 }
 //End of arrows
+@mixin buttons{
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    color: white;
+    background-color: v.$backgrounds;
+    border-radius: 5px;
+    &:hover{
+        cursor: pointer;
+        background: v.$darker;
+        color: black;
+    }
+}
+@mixin inputs{
+    padding: 10px 15px;
+    margin: 10px;
+    background-color: v.$darker;
+    border-radius: 5px;
+    border: none;
+    &[type=button],&[type=submit]{@include buttons}
+    &[type=text],&[type=number],&[type=password]{
+        &:focus{
+            border: {
+                radius: 5px;
+                bottom: 1.5px v.$backgrounds solid;
+            }
+        }
+    }
+}
+//nav_bar
+@mixin nav_bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    color: white;
+    background: v.$backgrounds;
+    box-shadow: v.$box-shadow;
+    list-style: none;
+    max-width: 100%;
+    padding: 0 6px;
+    img,p,a{margin: 0}
+    img{width: 4.5vw}
+    a{
+        text-decoration: none;
+        color: white;
+    }
+    ul{
+        background: v.$backgrounds;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        li{
+            //padding: 13px 18px;
+            padding: 1.19vw 3.19vw;
+            margin: 0;
+            &:hover{
+                cursor: pointer;
+                background: v.$tpcy;
+                border-bottom: 2px solid white;
+            }
+        }
+    }
+}
+//end of navbar

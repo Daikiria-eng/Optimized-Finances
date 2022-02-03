@@ -44,5 +44,12 @@ public class Conexion {
            ex.printStackTrace(System.out);
         }
     }
-    
+
+    public static void close(Statement st){
+        try {
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+    }    
 }

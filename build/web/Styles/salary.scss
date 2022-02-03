@@ -1,0 +1,19 @@
+@use 'variables' as v;
+@use 'mixins' as *;
+
+body{@include body_style(v.$backgrounds);}
+#salary{
+    background-color: white;
+    border-radius: 16px;
+    margin: 8vw 16vw;
+    padding: 2vw 4vw;
+    box-shadow: v.$box-shadow;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+input{
+    @include inputs;
+    padding: 1.5vw !important;  
+    margin: 1.2vw !important;
+}

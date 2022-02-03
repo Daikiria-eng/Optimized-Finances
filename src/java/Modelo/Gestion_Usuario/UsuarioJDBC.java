@@ -9,9 +9,10 @@ import java.util.List;
 public class UsuarioJDBC implements Validar_Usuario{
 
 //    private static final String SQL_SELECT = "SELECT id_cliente, nombre, apellido, correo, clave FROM cliente";
-    private static final String SQL_SELECT_LOGIN="SELECT * FROM usuario WHERE correo=? AND clave=?;";    
+    private static final String SQL_SELECT_LOGIN="SELECT nombres FROM usuario WHERE correo=? AND clave=?;";
     private static final String SQL_INSERT = "INSERT INTO usuario(nombres, correo, clave) VALUES(?, ?, ?)";
-    
+    private static final String SQL_INSERT_SALARIO="INSERT INTO salario (valor,periodo,id_usuario) VALUES (?,?,?);";
+    private static final String SQL_VERIFICAR_SALARIO="SELECT id_salario FROM salario WHERE id_usuario=?;";
 //    private static final String SQL_UPDATE = "UPDATE cliente SET nombre=?, apellido=?, correo=?, telefono=? WHERE id_cliente = ?";
 //    private static final String SQL_DELETE = "DELETE FROM cliente WHERE id_cliente=?";
 
@@ -107,27 +108,95 @@ public class UsuarioJDBC implements Validar_Usuario{
         return rows;
     }
 
-    public boolean iniciar(Usuario persona) throws ClassNotFoundException{
+    public String[] iniciar(Usuario persona) throws ClassNotFoundException{
         Connection conn=null;
-        PreparedStatement stmt=null;
+        //PreparedStatement stmt=null;
         ResultSet rs=null;
+        Statement st=null;
+        String[] id_name={};
+        int size=0;
 
         try{
             conn=Conexion.getConnection();
-            stmt=conn.prepareStatement(SQL_SELECT_LOGIN);
-            stmt.setString(1, persona.getCorreo());
-            stmt.setString(2, persona.getClave());
-            rs=stmt.executeQuery();
+            st=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            try {
+                rs=st.executeQuery("SELECT id_usuario,nombres FROM usuario WHERE correo='"+persona.getCorreo()+"' AND clave='"+persona.getClave()+"';");
+                if(rs.last()){
+                    size=rs.getRow();
+                    id_name=new String[size+1];
+                    System.out.println(size+" espacio "+rs.getRow());
+                    System.out.println(rs.getString("id_usuario")+" espacio "+rs.getString("nombres"));
+                }else{
+                    return null;
+                }
+                rs.first();
+                id_name[0]=rs.getString("id_usuario");
+                id_name[1]=rs.getString("nombres");
 
-            if(rs.next()) return true;
+                return id_name;
+            } catch (Exception e) {
+                System.out.print("Error al ejecutar: "+e);
+            }
         }catch(Exception err){
             System.out.println("Error al iniciar: "+err);
         }finally{
             Conexion.close(conn);
-            Conexion.close(stmt);
+            Conexion.close(st);
             Conexion.close(rs);
         }
     
+        return null;
+    }
+
+    public boolean salario(String valor,String periodo, String id_usuario){
+        Connection conn=null;
+        PreparedStatement ps=null;
+        int rows=0;
+        try{
+            conn=Conexion.getConnection();
+            ps=conn.prepareStatement(SQL_INSERT_SALARIO);
+            ps.setString(1, valor);
+            ps.setString(2, periodo);
+            ps.setString(3, id_usuario);
+            rows=ps.executeUpdate();
+            System.out.println("Inserting:\n"+SQL_INSERT_SALARIO);
+            try {                
+                if(rows!=0) return true;
+            } catch (Exception e) {
+                System.out.println("Error insertando:\n"+e);
+            }
+        }catch (Exception e){
+            System.out.println("Error al registrar salario\n:"+e);
+        }finally{
+            Conexion.close(ps);
+            Conexion.close(conn);
+        }
+
+        return false;
+    }
+
+    public boolean validar_salario(String[] id_usuario){
+        Connection conn=null;
+        PreparedStatement ps=null;
+        ResultSet rs=null;
+        System.out.println(id_usuario[0]+" id usuario");
+        String id=id_usuario[0];
+        System.out.println(id);
+        try{
+            conn=Conexion.getConnection();
+            ps=conn.prepareStatement(SQL_VERIFICAR_SALARIO);
+            ps.setString(1, (String)id_usuario[0]);
+            rs=ps.executeQuery();
+            if(rs.next()) return true;
+        }catch (Exception e){
+            System.out.println("Error al verificar salario:\n"+e);
+        }finally{
+            Conexion.close(conn);
+            Conexion.close(ps);
+            Conexion.close(rs);
+        }
+
+
         return false;
     }
 

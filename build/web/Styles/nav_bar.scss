@@ -1,0 +1,6 @@
+@use 'mixins' as *;
+
+nav{
+    @include nav_bar;
+    input[type=checkbox]{ display: none }
+}

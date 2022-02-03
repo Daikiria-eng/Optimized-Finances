@@ -1,0 +1,44 @@
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  text-align: center;
+  color: white;
+  background: #1a2537;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.4);
+  list-style: none;
+  max-width: 100%;
+  padding: 0 6px;
+}
+nav img, nav p, nav a {
+  margin: 0;
+}
+nav img {
+  width: 4.5vw;
+}
+nav a {
+  text-decoration: none;
+  color: white;
+}
+nav ul {
+  background: #1a2537;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+nav ul li {
+  padding: 1.19vw 3.19vw;
+  margin: 0;
+}
+nav ul li:hover {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 2px solid white;
+}
+nav input[type=checkbox] {
+  display: none;
+}
+
+/*# sourceMappingURL=nav_bar.css.map */

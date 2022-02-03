@@ -58,6 +58,7 @@ public class Controlador2 extends HttpServlet {
                 
                 try{
                     acc_OP.insert(acc);
+                    
                 }catch (Exception err){
                     System.out.println("Error: "+err);
                 }

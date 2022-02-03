@@ -5,6 +5,7 @@ import java.io.*;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
+//import javax.servlet.http.HttpSession;
 import javax.servlet.http.*;
 
 @WebServlet("/Controlador")
@@ -63,11 +64,12 @@ public class Controlador extends HttpServlet {
                 p.setClave(clave);
                 try{
                     persona_OP.insert(p);
+                    response.sendRedirect("Login.jsp");
                 }catch (Exception err){
                     System.out.println("ERror: "+err);
                 }
                 out.println("<script>alert(`Registro Exitoso`)</script>");
-                request.getRequestDispatcher("Login.jsp").forward(request, response);
+                //request.getRequestDispatcher("Login.jsp").forward(request, response);
                 break;
             }
             
@@ -77,14 +79,37 @@ public class Controlador extends HttpServlet {
                 String clave=request.getParameter("clave");
                 p.setCorreo(correo);
                 p.setClave(clave);
-                try{
-                    if(persona_OP.iniciar(p)) 
+                try {                    
+                    String[] user_name=persona_OP.iniciar(p);
+                    if(user_name!=null) {
+                        request.getSession().setAttribute("usuario", user_name[1]);
+                        request.getSession().setAttribute("id_usuario", user_name[0]);
+                        if(persona_OP.validar_salario(user_name)){
+                            response.sendRedirect("ppal.jsp");
+                        }else response.sendRedirect("salario.jsp");
+                    }else out.print("Bad!");
+                } catch (Exception e) {
+                    System.out.println("error: "+e);
+                }
+                /*try{
+                    if(persona_OP.iniciar(p)){ 
                         response.sendRedirect("ppal.jsp");
+                    }
                     else response.sendRedirect("Login.jsp");
                 }catch(IOException | ClassNotFoundException err){
                     System.out.println("Error al iniciar: "+err);
-                }
+                }*/
+
                 break;
+            }
+            case "Anotado":{
+                String valor=request.getParameter("valor");
+                String periodo=request.getParameter("periodo");
+                String id_usuario=(String) request.getSession().getAttribute("id_usuario");                
+                System.out.println(valor+"\t"+periodo+"\t"+id_usuario);
+                if(persona_OP.salario(valor,periodo,id_usuario)){
+                    response.sendRedirect("ppal.jsp");
+                }else response.sendRedirect("Login.jsp");
             }
 //            case "Editar":
 //            {
