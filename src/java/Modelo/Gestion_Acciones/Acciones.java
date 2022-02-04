@@ -8,6 +8,7 @@ public class Acciones {
     String tipo_Gasto;
     String fecha_Inicio;
     String fecha_Final;
+    String id_usuario;
 
     public Acciones() {
 
@@ -17,12 +18,13 @@ public class Acciones {
         this.id_Acciones = id_Acciones;
     }
 
-    public Acciones(String tipo_Acciones, String descripcion, String tipo_Gasto, String fecha_Inicio, String fecha_Final) {
+    public Acciones(String tipo_Acciones, String descripcion, String tipo_Gasto, String fecha_Inicio, String fecha_Final, String id_usuario) {
         this.tipo_Acciones = tipo_Acciones;
         this.descripcion = descripcion;
         this.tipo_Gasto = tipo_Gasto;
         this.fecha_Inicio = fecha_Inicio;
         this.fecha_Final = fecha_Final;
+        this.id_usuario=id_usuario;
     }
 
     public String getId_Acciones() {
@@ -73,9 +75,15 @@ public class Acciones {
         this.fecha_Final = fecha_Final;
     }
 
+    public void setId_usuario(String id_usuario){
+        this.id_usuario=id_usuario;
+    }
+    public String getId_usuario(){
+        return id_usuario;
+    }
+
     @Override
     public String toString() {
         return "Acciones{" + "id_Acciones=" + id_Acciones + ", tipo_Acciones=" + tipo_Acciones + ", descripcion=" + descripcion + ", tipo_Gasto=" + tipo_Gasto + ", fecha_Inicio=" + fecha_Inicio + ", fecha_Final=" + fecha_Final + '}';
     }
-
 }

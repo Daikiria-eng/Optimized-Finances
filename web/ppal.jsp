@@ -22,7 +22,6 @@
             <div class="utilities" id="user_utilities">
                 <h2><%out.print(user_name);%></h2 ><br/>
                 <ol id="user_items">
-                    <a href="dinero.jsp"><li>Dinero</li></a>
                     <a href="metas_Objetivos.jsp"><li>Metas</li></a>
                     <a href="consejos.jsp"><li>Consejos</li></a>
                     <hr/>

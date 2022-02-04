@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,14 +10,14 @@
     </head>
     <body>
         <div id="form_salary">
-            <form id="salary" method="POST" action="Controlador">
+            <form id="salary" method="POST" action="Controlador3">
                 <label for="input_salary">Su salario: $</label>
                 <input 
                     type="number" id="input_salary" 
                     placeholder="Ingrese su salario" 
                     name="valor" 
                 />
-                <label for="salary_days">Ingrese el per�odo de su salario en días</label>
+                <label for="salary_days">Ingrese el período de su salario en días</label>
                 <input 
                     type="number" id="salary_days"
                     placeholder="Ingrese período de pago"

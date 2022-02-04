@@ -36,11 +36,11 @@
                 <label for="name">Descripción:</label>
                 <input 
                     type="text" id="name" name="descripcion" required
-                    minlength="10" maxlength="18" size="20"
+                    minlength="5" maxlength="198" size="20"
                     placeholder="Ingrese una descripción al egreso"
                 />
 
-                <label for="name">Tipo de egreso</label>
+                <label for="name">Tipo de accion</label>
                 <input 
                     list="opcion_Gasto" 
                     required name="opciones2"
@@ -50,7 +50,9 @@
                         <option value="Gasto">
                         <option value="Ahorro">
                     </datalist>
-
+                <label for="goal_cost">Valor $</label>
+                <input 
+                    type="number" name="valor"
                 <label for="start">Fecha Inicial:</label>
                 <input 
                     type="date" id="start" name="fecha_Ini"

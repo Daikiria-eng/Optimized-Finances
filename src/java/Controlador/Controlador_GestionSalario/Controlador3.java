@@ -1,11 +1,10 @@
-package Controlador.Controlador_GestionAcc;
+package Controlador.Controlador_GestionSalario;
 
-import Modelo.Gestion_Acciones.*;
+import Modelo.Gestion_Salario.Salario;
+import Modelo.Gestion_Salario.SalarioJDBC;
 import java.io.IOException;
-import static java.lang.System.out;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,44 +13,40 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author user
  */
-//@WebServlet("/Controlador2")
-public class Controlador2 extends HttpServlet {
-    AccionesJDBC acc_OP = new AccionesJDBC();
+public class Controlador3 extends HttpServlet {
+    SalarioJDBC salario_op=new SalarioJDBC();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        String accion = request.getParameter("accion_M");
-        
-        switch (accion) {            
-            case "Registrar":{
-                Acciones acc = new Acciones();
-                String opc1 = request.getParameter("opciones1");
-                String des = request.getParameter("descripcion");
-                String opc2 = request.getParameter("opciones2");
-                String fecha1 = request.getParameter("fecha_Ini");
-                String fecha2 = request.getParameter("fecha_Fin");
-                String id_usuario=(String) request.getSession().getAttribute("id_usuario");
-                
-                acc.setTipo_Acciones(opc1);
-                acc.setDescripcion(des);
-                acc.setTipo_Gasto(opc2);
-                acc.setFecha_Inicio(fecha1);
-                acc.setFecha_Final(fecha2);
-                acc.setId_usuario(id_usuario);
-                try{
-                    acc_OP.insert(acc);
-                    response.sendRedirect("metas_Objetivos.jsp");
-                    out.println("Right!");
-                }catch (Exception err){
-                    System.out.println("Error registrando acciones: "+err);
+        String accion = request.getParameter("accion");
+        switch (accion) {
+
+            case "Anotado": {
+                Salario s = new Salario();
+                String valor = request.getParameter("valor");
+                String periodo = request.getParameter("periodo");
+                String id_usuario = (String) request.getSession().getAttribute("id_usuario");
+                s.setValor(valor);
+                s.setPeriodo(periodo);
+                s.setId_usuario(id_usuario);
+                boolean sw=false;
+                System.out.println(valor + "\t" + periodo + "\t" + id_usuario);
+                try {
+                    if (salario_op.insertar_salario(s)) {
+                        response.sendRedirect("ppal.jsp");
+                        request.getSession().setAttribute("salario_valor", s.getValor());
+                        sw=true;
+                    } else {
+                        response.sendRedirect("salario.jsp");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error al insertar salario:\n" + e);
                 }
-                out.println("End");
+                //response.sendRedirect("ppal.jsp");
                 break;
             }
-            default:
-                throw new AssertionError();
         }
     }
 

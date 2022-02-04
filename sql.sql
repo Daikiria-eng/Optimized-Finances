@@ -17,6 +17,7 @@ CREATE TABLE acciones(
     tipo_gasto VARCHAR(45) NOT NULL,
     fecha_inicio DATE,
     fecha_final DATE NOT NULL,
+    valor BIGINT NOT NULL,
     id_usuario INT NOT NULL,
     INDEX(id_usuario),
     PRIMARY KEY(id_acciones),

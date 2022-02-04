@@ -1,8 +1,9 @@
 package Controlador.Controlador_GestionUsers;
 
 import Modelo.*;
+import Modelo.Gestion_Salario.*;
 import java.io.*;
-import java.util.*;
+//import java.util.*;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 //import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ public class Controlador extends HttpServlet {
 
     UsuarioJDBC persona_OP = new UsuarioJDBC();
     Usuario persona = new Usuario();
+    SalarioJDBC salario_op=new SalarioJDBC();
     int r = 0;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -75,41 +77,54 @@ public class Controlador extends HttpServlet {
             
             case "Iniciar":{
                 Usuario p=new Usuario();
+                Salario s=new Salario();
                 String correo=request.getParameter("correo");
                 String clave=request.getParameter("clave");
+                //String[] salario_v={};
+                String salario_v[]=new String[2];
                 p.setCorreo(correo);
                 p.setClave(clave);
-                try {                    
+                boolean user_auth=false;
+                try {
                     String[] user_name=persona_OP.iniciar(p);
                     if(user_name!=null) {
-                        request.getSession().setAttribute("usuario", user_name[1]);
                         request.getSession().setAttribute("id_usuario", user_name[0]);
-                        if(persona_OP.validar_salario(user_name)){
+                        request.getSession().setAttribute("usuario", user_name[1]);
+                        System.out.print(user_name[0]+"\t"+user_name[1]);
+                        s.setId_usuario(user_name[0]);
+                        try {                            
+                            salario_v=salario_op.validar_salario(s);
+                        } catch (Exception e) {
+                            System.out.println("Error, no hay salario:\n"+e);
+                        }
+                        if(salario_v!=null){
+                            System.out.print(salario_v[0]+"\t"+salario_v[1]);
+                            request.getSession().setAttribute("salario_valor", salario_v[0]);
+                            request.getSession().setAttribute("salario_periodo", salario_v[1]);
+                            System.out.println("checkpoint");
                             response.sendRedirect("ppal.jsp");
-                        }else response.sendRedirect("salario.jsp");
-                    }else out.print("Bad!");
-                } catch (Exception e) {
-                    System.out.println("error: "+e);
+                        }else{response.sendRedirect("salario.jsp");}
+                    } else response.sendRedirect(request.getContextPath()+"/Login.jsp");
+                } catch (IOException | ClassNotFoundException e) {
+                    System.out.println("Error al iniciar sesión:\n"+e);
                 }
-                /*try{
-                    if(persona_OP.iniciar(p)){ 
-                        response.sendRedirect("ppal.jsp");
-                    }
-                    else response.sendRedirect("Login.jsp");
-                }catch(IOException | ClassNotFoundException err){
-                    System.out.println("Error al iniciar: "+err);
-                }*/
-
+                /*if(!user_auth){
+                    response.sendRedirect(request.getContextPath()+"/Login.jsp");
+                }*/   
                 break;
             }
-            case "Anotado":{
-                String valor=request.getParameter("valor");
-                String periodo=request.getParameter("periodo");
-                String id_usuario=(String) request.getSession().getAttribute("id_usuario");                
-                System.out.println(valor+"\t"+periodo+"\t"+id_usuario);
-                if(persona_OP.salario(valor,periodo,id_usuario)){
-                    response.sendRedirect("ppal.jsp");
-                }else response.sendRedirect("Login.jsp");
+
+            
+            case "Eliminar":{
+                Usuario p=new Usuario();
+                String id_usuario=(String) request.getSession().getAttribute("id_usuario");
+                p.setIdCliente(id_usuario);
+                if(persona_OP.eliminar_usuario(p))
+                    request.getSession().removeAttribute("id_usuario");
+                    request.getSession().removeAttribute("usuario");
+                    request.getSession().invalidate();
+
+                    response.sendRedirect(request.getContextPath()+"/Index.jsp");
             }
 //            case "Editar":
 //            {

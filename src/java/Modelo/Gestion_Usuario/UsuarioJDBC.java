@@ -11,8 +11,7 @@ public class UsuarioJDBC implements Validar_Usuario{
 //    private static final String SQL_SELECT = "SELECT id_cliente, nombre, apellido, correo, clave FROM cliente";
     private static final String SQL_SELECT_LOGIN="SELECT nombres FROM usuario WHERE correo=? AND clave=?;";
     private static final String SQL_INSERT = "INSERT INTO usuario(nombres, correo, clave) VALUES(?, ?, ?)";
-    private static final String SQL_INSERT_SALARIO="INSERT INTO salario (valor,periodo,id_usuario) VALUES (?,?,?);";
-    private static final String SQL_VERIFICAR_SALARIO="SELECT id_salario FROM salario WHERE id_usuario=?;";
+    private static final String SQL_DELETE_USUARIO="DELETE FROM usuario WHERE id_usuario=?;";    
 //    private static final String SQL_UPDATE = "UPDATE cliente SET nombre=?, apellido=?, correo=?, telefono=? WHERE id_cliente = ?";
 //    private static final String SQL_DELETE = "DELETE FROM cliente WHERE id_cliente=?";
 
@@ -124,9 +123,8 @@ public class UsuarioJDBC implements Validar_Usuario{
                 if(rs.last()){
                     size=rs.getRow();
                     id_name=new String[size+1];
-                    System.out.println(size+" espacio "+rs.getRow());
-                    System.out.println(rs.getString("id_usuario")+" espacio "+rs.getString("nombres"));
                 }else{
+                    System.out.println("Error # Nada"); 
                     return null;
                 }
                 rs.first();
@@ -135,10 +133,10 @@ public class UsuarioJDBC implements Validar_Usuario{
 
                 return id_name;
             } catch (Exception e) {
-                System.out.print("Error al ejecutar: "+e);
+                System.out.print("Error al obtener credenciales:\n"+e);
             }
         }catch(Exception err){
-            System.out.println("Error al iniciar: "+err);
+            System.out.println("Error al auntenticar: "+err);
         }finally{
             Conexion.close(conn);
             Conexion.close(st);
@@ -148,57 +146,29 @@ public class UsuarioJDBC implements Validar_Usuario{
         return null;
     }
 
-    public boolean salario(String valor,String periodo, String id_usuario){
+    public boolean eliminar_usuario(Usuario p){
         Connection conn=null;
         PreparedStatement ps=null;
-        int rows=0;
-        try{
+        try {
             conn=Conexion.getConnection();
-            ps=conn.prepareStatement(SQL_INSERT_SALARIO);
-            ps.setString(1, valor);
-            ps.setString(2, periodo);
-            ps.setString(3, id_usuario);
-            rows=ps.executeUpdate();
-            System.out.println("Inserting:\n"+SQL_INSERT_SALARIO);
-            try {                
-                if(rows!=0) return true;
-            } catch (Exception e) {
-                System.out.println("Error insertando:\n"+e);
-            }
-        }catch (Exception e){
-            System.out.println("Error al registrar salario\n:"+e);
-        }finally{
-            Conexion.close(ps);
-            Conexion.close(conn);
+            System.out.println("Eliminando");
+            ps=conn.prepareStatement(
+                SQL_DELETE_USUARIO
+                //+"ALTER TABLE usuario AUTO_INCREMENT="+p.getIdCliente()+";"+
+                //"ALTER TABLE salario AUTO_INCREMENT="+p.getIdCliente()+";"
+            );
+            ps.setString(1, p.getIdCliente());
+            return ps.execute();
+        } catch (Exception e) {
+            System.out.println("Error al eliminar:\n"+e);
         }
 
         return false;
     }
 
-    public boolean validar_salario(String[] id_usuario){
-        Connection conn=null;
-        PreparedStatement ps=null;
-        ResultSet rs=null;
-        System.out.println(id_usuario[0]+" id usuario");
-        String id=id_usuario[0];
-        System.out.println(id);
-        try{
-            conn=Conexion.getConnection();
-            ps=conn.prepareStatement(SQL_VERIFICAR_SALARIO);
-            ps.setString(1, (String)id_usuario[0]);
-            rs=ps.executeQuery();
-            if(rs.next()) return true;
-        }catch (Exception e){
-            System.out.println("Error al verificar salario:\n"+e);
-        }finally{
-            Conexion.close(conn);
-            Conexion.close(ps);
-            Conexion.close(rs);
-        }
+    
 
-
-        return false;
-    }
+    
 
 //    public int update(Usuario p) {
 //        Connection conn = null;
