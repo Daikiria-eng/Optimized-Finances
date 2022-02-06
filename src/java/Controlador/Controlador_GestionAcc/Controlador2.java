@@ -33,6 +33,7 @@ public class Controlador2 extends HttpServlet {
                 String fecha1 = request.getParameter("fecha_Ini");
                 String fecha2 = request.getParameter("fecha_Fin");
                 String id_usuario=(String) request.getSession().getAttribute("id_usuario");
+                String valor=request.getParameter("valor");
                 
                 acc.setTipo_Acciones(opc1);
                 acc.setDescripcion(des);
@@ -40,10 +41,11 @@ public class Controlador2 extends HttpServlet {
                 acc.setFecha_Inicio(fecha1);
                 acc.setFecha_Final(fecha2);
                 acc.setId_usuario(id_usuario);
+                acc.setValor(valor);
                 try{
+                    System.out.println("checkpoint on Controlador2 \n"+id_usuario+" "+opc1+" "+des+" "+opc2+" "+fecha1+" "+fecha2+" ");
                     acc_OP.insert(acc);
                     response.sendRedirect("metas_Objetivos.jsp");
-                    out.println("Right!");
                 }catch (Exception err){
                     System.out.println("Error registrando acciones: "+err);
                 }

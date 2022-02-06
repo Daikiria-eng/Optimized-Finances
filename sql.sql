@@ -29,6 +29,7 @@ CREATE TABLE salario(
     valor BIGINT NOT NULL,
     periodo INT NOT NULL,
     id_usuario INT NOT NULL,
+    actual BIGINT NOT NULL,
     PRIMARY KEY (id_salario),
     INDEX (id_usuario),
     CONSTRAINT fk_salario

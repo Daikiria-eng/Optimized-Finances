@@ -27,16 +27,19 @@ public class Controlador3 extends HttpServlet {
                 Salario s = new Salario();
                 String valor = request.getParameter("valor");
                 String periodo = request.getParameter("periodo");
+                String salario_actual=request.getParameter("salario_actual");
                 String id_usuario = (String) request.getSession().getAttribute("id_usuario");
                 s.setValor(valor);
                 s.setPeriodo(periodo);
                 s.setId_usuario(id_usuario);
+                s.setActual(salario_actual);
                 boolean sw=false;
-                System.out.println(valor + "\t" + periodo + "\t" + id_usuario);
+                System.out.println(valor + "\t" + periodo + "\t" + id_usuario + "\t" + salario_actual);
                 try {
                     if (salario_op.insertar_salario(s)) {
                         response.sendRedirect("ppal.jsp");
-                        request.getSession().setAttribute("salario_valor", s.getValor());
+                        request.getSession().setAttribute("salario_actual", salario_actual);
+                        //request.getSession().setAttribute("salario_valor", s.getValor());
                         sw=true;
                     } else {
                         response.sendRedirect("salario.jsp");

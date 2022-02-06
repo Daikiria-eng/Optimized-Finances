@@ -9,6 +9,7 @@ public class Acciones {
     String fecha_Inicio;
     String fecha_Final;
     String id_usuario;
+    String valor;
 
     public Acciones() {
 
@@ -25,6 +26,7 @@ public class Acciones {
         this.fecha_Inicio = fecha_Inicio;
         this.fecha_Final = fecha_Final;
         this.id_usuario=id_usuario;
+        this.valor=valor;
     }
 
     public String getId_Acciones() {
@@ -80,6 +82,13 @@ public class Acciones {
     }
     public String getId_usuario(){
         return id_usuario;
+    }
+
+    public void setValor(String valor){
+        this.valor=valor;
+    }
+    public String getValor(){
+        return valor;
     }
 
     @Override

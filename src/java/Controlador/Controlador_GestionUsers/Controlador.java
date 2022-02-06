@@ -85,26 +85,29 @@ public class Controlador extends HttpServlet {
                 p.setCorreo(correo);
                 p.setClave(clave);
                 boolean user_auth=false;
+
                 try {
                     String[] user_name=persona_OP.iniciar(p);
                     if(user_name!=null) {
                         request.getSession().setAttribute("id_usuario", user_name[0]);
                         request.getSession().setAttribute("usuario", user_name[1]);
-                        System.out.print(user_name[0]+"\t"+user_name[1]);
+                        System.out.print("Checkpoint on Controlador\t"+user_name[0]+"\t"+user_name[1]);
                         s.setId_usuario(user_name[0]);
-                        try {                            
+
+                        try {
                             salario_v=salario_op.validar_salario(s);
                         } catch (Exception e) {
                             System.out.println("Error, no hay salario:\n"+e);
                         }
+
                         if(salario_v!=null){
                             System.out.print(salario_v[0]+"\t"+salario_v[1]);
-                            request.getSession().setAttribute("salario_valor", salario_v[0]);
+                            request.getSession().setAttribute("salario_actual", salario_v[0]);
                             request.getSession().setAttribute("salario_periodo", salario_v[1]);
                             System.out.println("checkpoint");
                             response.sendRedirect("ppal.jsp");
                         }else{response.sendRedirect("salario.jsp");}
-                    } else response.sendRedirect(request.getContextPath()+"/Login.jsp");
+                    } else {response.sendRedirect(request.getContextPath()+"/Login.jsp");}
                 } catch (IOException | ClassNotFoundException e) {
                     System.out.println("Error al iniciar sesión:\n"+e);
                 }

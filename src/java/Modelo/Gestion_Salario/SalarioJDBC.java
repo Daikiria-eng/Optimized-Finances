@@ -11,7 +11,7 @@ import java.sql.Statement;
  * @author user
  */
 public class SalarioJDBC {
-    private static final String SQL_INSERT_SALARIO="INSERT INTO salario (valor,periodo,id_usuario) VALUES (?,?,?);";
+    private static final String SQL_INSERT_SALARIO="INSERT INTO salario (valor,actual,periodo,id_usuario) VALUES (?,?,?,?);";
 
     public boolean insertar_salario(Salario s) {
         Connection conn = null;
@@ -21,8 +21,9 @@ public class SalarioJDBC {
             conn = Conexion.getConnection();
             ps = conn.prepareStatement(SQL_INSERT_SALARIO);
             ps.setString(1, s.getValor());
-            ps.setString(2, s.getPeriodo());
-            ps.setString(3, s.getId_usuario());
+            ps.setString(2, s.getActual());
+            ps.setString(3, s.getPeriodo());
+            ps.setString(4, s.getId_usuario());
             System.out.println("Inserting:\n" + SQL_INSERT_SALARIO);
             r=ps.executeUpdate();
             if (r!=0) {
@@ -49,7 +50,7 @@ public class SalarioJDBC {
         try {
             conn = Conexion.getConnection();
             st = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs = st.executeQuery("SELECT valor,periodo FROM salario WHERE id_usuario=" + s.getId_usuario() + ";");
+            rs = st.executeQuery("SELECT actual,periodo FROM salario WHERE id_usuario=" + s.getId_usuario() + ";");
             if (rs.last()) {
                 System.out.println(rs);
                 size = rs.getRow();
@@ -59,7 +60,7 @@ public class SalarioJDBC {
             }
 
             rs.first();
-            salario_v[0] = rs.getString("valor");
+            salario_v[0] = rs.getString("actual");
             salario_v[1] = rs.getString("periodo");
 
             return salario_v;

@@ -26,10 +26,11 @@
                 <input 
                     list="opcion_MO" required 
                     name="opciones1" id="list_MO"
-                    placeholder="Meta u objetivo?"
+                    placeholder="Meta u objetivo? Despliegue opciones"
                 />
                     <datalist id="opcion_MO">
                         <option value="Meta">
+                        <option value="Gasto necesario">
                         <option value="Objetivo">
                     </datalist>
 
@@ -44,20 +45,23 @@
                 <input 
                     list="opcion_Gasto" 
                     required name="opciones2"
-                    placeholder="Gasto o ahorro?"
+                    placeholder="Gasto o ahorro? Despliegue opciones"
                 />
                     <datalist id="opcion_Gasto">
                         <option value="Gasto">
                         <option value="Ahorro">
                     </datalist>
-                <label for="goal_cost">Valor $</label>
+                <label for="goal_cost">Valor</label>
                 <input 
                     type="number" name="valor"
+                    id="goal_cost" placeholder="valor de la acción"
+                />
                 <label for="start">Fecha Inicial:</label>
                 <input 
                     type="date" id="start" name="fecha_Ini"
                     value="2022-01-01"
-                    min="2022-01-01" max="2025-12-31" required
+                    min="2022-01-01" max="2025-12-31"
+                    disabled="true"
                 />
 
                 <label for="start">Fecha Final:</label>
@@ -66,7 +70,10 @@
                     value="2022-01-01"
                     min="2022-01-01" max="2025-12-31" required
                 />
-                <input type="submit" name="accion_M" value="Registrar">
+                <input 
+                    type="submit" value="Registrar"
+                    name="accion_M" 
+                />
             </form>
         </section>
         <script src="js/nav_bar.js"></script>

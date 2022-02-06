@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     String nombre=(String) request.getSession().getAttribute("usuario");
-    String salario=(String) request.getSession().getAttribute("salario_valor");
+    String salario=(String) request.getSession().getAttribute("salario_actual");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +45,7 @@
             </div>
             <div id="user_stats">
                 <div id="cash_div">
-                    <h1 id="my_cash"><i>Su dinero: $</i><%out.print(salario);%><strong id="cash"></strong></h1>
+                    <h1 id="my_cash"><i>Su dinero: $</i> <%out.print(salario);%> <strong id="cash"></strong></h1>
                     <div id="prev_subtract_label">
                         <label for="prev_subtract">                    
                             <i class="arrow" id="prev_subtract_arrow"></i>
@@ -58,6 +58,13 @@
                         </label>
                         <h3 id="next_subtract">Próxima resta:<br/>   de: $ <br/>    En: </h3>                
                     </div>
+                    <form method="POST" action="" id="reload_salary">
+                        <input 
+                            type="submit" name="accion"
+                            id="refresh_salary"
+                            value="Actualizar"
+                        />
+                    </form>
                 </div>
             </div>
         </div>

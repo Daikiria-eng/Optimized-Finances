@@ -8,13 +8,15 @@ public class Salario {
     String id_usuario;
     String valor;
     String periodo;
+    String actual;
 
     public Salario(){}
 
-    public Salario(String id_usuario, String valor, String periodo){
+    public Salario(String id_usuario, String valor, String periodo,String actual){
         this.valor=valor;
         this.periodo=periodo;
         this.id_usuario=id_usuario;
+        this.actual=actual;
     }
 
     public String getValor(){
@@ -38,8 +40,15 @@ public class Salario {
         this.id_usuario=id_usuario;
     }
 
+    public void setActual(String actual){
+        this.actual=actual;
+    }
+    public String getActual(){
+        return actual;
+    }
+
     @Override
     public String toString(){
-        return "Salario{ "+" valor="+valor+" periodo="+periodo+" id_usuario="+id_usuario+" }";
+        return "Salario{ "+" valor="+valor+" periodo="+periodo+" id_usuario="+id_usuario+" actual="+actual+" }";
     }
 }

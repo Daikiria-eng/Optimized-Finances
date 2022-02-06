@@ -16,12 +16,25 @@
                     type="number" id="input_salary" 
                     placeholder="Ingrese su salario" 
                     name="valor" 
+                    required
                 />
-                <label for="salary_days">Ingrese el período de su salario en días</label>
+                <label for="salary_days">
+                    Ingrese el período de su salario en días
+                </label>
                 <input 
                     type="number" id="salary_days"
                     placeholder="Ingrese período de pago"
                     name="periodo"
+                    required
+                />
+                <label for="current_salary_in">
+                    Ingrese su salario actual
+                </label>
+                <input 
+                    type="number" id="current_salary_in"
+                    placeholder="$ su salario actual"
+                    name="salario_actual"
+                    required
                 />
                 <input 
                     type="submit" name="accion" 

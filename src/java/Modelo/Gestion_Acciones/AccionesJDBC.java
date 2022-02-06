@@ -11,7 +11,7 @@ import java.util.List;
 public class AccionesJDBC implements Validar_Usuario{
 
 //    private static final String SQL_SELECT = "SELECT id_cliente, nombre, apellido, correo, clave FROM cliente";
-    private static final String SQL_INSERT = "INSERT INTO acciones(tipo_acciones, descripcion, tipo_gasto, fecha_inicio, fecha_final,id_usuario) VALUES(?, ?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO acciones(tipo_acciones, descripcion, tipo_gasto, fecha_inicio, fecha_final,id_usuario,valor) VALUES(?, ?, ?, ?, ?, ?,?)";
     
 //    private static final String SQL_UPDATE = "UPDATE cliente SET nombre=?, apellido=?, correo=?, telefono=? WHERE id_cliente = ?";
 //    private static final String SQL_DELETE = "DELETE FROM cliente WHERE id_cliente=?";
@@ -89,6 +89,7 @@ public class AccionesJDBC implements Validar_Usuario{
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
+        System.out.println("checkpoint on AccionesJDBC");
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
@@ -99,9 +100,14 @@ public class AccionesJDBC implements Validar_Usuario{
             stmt.setString(4, acciones.getFecha_Inicio());
             stmt.setString(5, acciones.getFecha_Final());
             stmt.setString(6, acciones.getId_usuario());
+            stmt.setString(7, acciones.getValor());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
-            rows = stmt.executeUpdate();
+            try {                
+                rows = stmt.executeUpdate();
+            } catch (Exception e) {
+                System.out.println("Error en registro de acciones:\n"+e);
+            }
             System.out.println("Registros afectados:" + rows);
         } catch (SQLException ex) {
         } finally {
