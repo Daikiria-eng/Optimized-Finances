@@ -1,0 +1,34 @@
+@use 'variables' as v;
+@use 'mixins' as *;
+
+@mixin margin_page{
+    margin: 4vw 10vw;
+    padding: 3vw 5vw;
+}
+@mixin btn_importants{
+    padding: 2% !important;
+}
+
+body{@include body_style(#cccccc);}
+input{
+    @include inputs;
+    @include btn_importants();
+}
+button{
+    @include buttons;
+    @include btn_importants;
+    min-width: 98%;
+}
+section {
+    @include margin_page();
+    background-color: white;
+    border-radius: 19px;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.4);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}

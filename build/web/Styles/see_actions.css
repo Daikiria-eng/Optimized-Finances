@@ -147,4 +147,122 @@ a {
   border-radius: 10px;
 }
 
-/*# sourceMappingURL=usuario.css.map */
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(90deg, #020024 4%, #090979 13%, #00d4ff 67%);
+}
+
+input {
+  padding: 10px 15px;
+  margin: 10px;
+  background-color: #cccccc;
+  border-radius: 6px;
+  border: none;
+  margin: 2px !important;
+  padding: 4px 6px !important;
+  max-width: 100%;
+}
+input[type=button], input[type=submit] {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  color: white;
+  background-color: #1a2537;
+  border-radius: 5px;
+}
+input[type=button]:hover, input[type=submit]:hover {
+  cursor: pointer;
+  background: #cccccc;
+  color: black;
+}
+input[type=text]:focus, input[type=number]:focus, input[type=password]:focus {
+  border-radius: 5px;
+  border-bottom: 1.5px #1a2537 solid;
+}
+input[type=submit] {
+  padding: 8px !important;
+}
+
+#corpse {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.45);
+  margin: 1vw 1.5vw;
+  padding: 0.5vw 1vw;
+  border-radius: 10px;
+}
+
+#print_cards {
+  margin: 0px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cards {
+  background-color: white;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.4);
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: repeat(7, auto);
+}
+
+.cards_labels {
+  display: grid;
+  grid-template-rows: repeat(7, auto);
+  justify-content: right;
+  text-align: right;
+  grid-column: 1/2;
+  margin: 5px 10px;
+}
+.cards_labels label {
+  padding: 6% 0;
+}
+
+.cards_inputs {
+  display: grid;
+  grid-template-rows: repeat(7, auto);
+  justify-content: left;
+  text-align: left;
+  grid-column: 2/3;
+}
+
+.active_modify {
+  grid-column: 1/2;
+  grid-row: 7/8;
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  color: white;
+  background-color: #1a2537;
+  border-radius: 5px;
+  padding: 8px !important;
+  margin: 2px;
+  text-align: center;
+}
+.active_modify:hover {
+  cursor: pointer;
+  background: #cccccc;
+  color: black;
+}
+
+.modify_action {
+  grid-column: 2/3;
+  grid-row: 7/8;
+}
+
+.delete_card_c {
+  grid-column: 3/4;
+  grid-row: 7/8;
+  background-color: rgba(255, 0, 0, 0.5) !important;
+}
+.delete_card_c:hover {
+  background-color: rgba(255, 0, 0, 0.5) !important;
+}
+
+/*# sourceMappingURL=see_actions.css.map */

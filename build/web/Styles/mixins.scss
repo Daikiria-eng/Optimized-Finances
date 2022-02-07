@@ -51,7 +51,7 @@
     padding: 10px 15px;
     margin: 10px;
     background-color: v.$darker;
-    border-radius: 5px;
+    border-radius: 6px;
     border: none;
     &[type=button],&[type=submit]{@include buttons}
     &[type=text],&[type=number],&[type=password]{

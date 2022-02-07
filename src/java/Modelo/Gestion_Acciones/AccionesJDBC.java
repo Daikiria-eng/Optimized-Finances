@@ -117,7 +117,57 @@ public class AccionesJDBC implements Validar_Usuario{
         return rows;
     }
 
+    public String[][] getAcciones(String id_usuario){
+        Connection conn=null;
+        ResultSet rs=null;
+        Statement st=null;
+        String[][] actions_v={};
+        int size=0;
+        try{
+            conn=Conexion.getConnection();
+            st=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            rs=st.executeQuery(
+                "SELECT tipo_acciones,descripcion,tipo_gasto,fecha_inicio,fecha_final,valor FROM acciones WHERE id_usuario="+id_usuario+";"
+                    );
+            if(rs.last()){
+                size=rs.getRow();
+                actions_v=new String[size][6];
+                System.out.println(size);
+            }
+            rs.first();
+            int i=0;
+            do{
+                actions_v[i][0]=rs.getString("tipo_acciones");
+                actions_v[i][1]=rs.getString("descripcion");
+                actions_v[i][2]=rs.getString("tipo_gasto");
+                actions_v[i][3]=rs.getString("fecha_inicio");
+                actions_v[i][4]=rs.getString("fecha_final");
+                actions_v[i][5]=rs.getString("valor");
+                i++;
+            }while(rs.next());
 
+            return actions_v;
+        }catch(Exception e){
+            System.out.println("Error al obtener acciones:\n"+e);
+        }finally{
+            Conexion.close(conn);
+            Conexion.close(rs);
+            Conexion.close(st);
+        }
+
+        return null;
+    }
+
+    public static void main(String[] args){
+        AccionesJDBC a=new AccionesJDBC();
+        String[][] v=a.getAcciones("3");
+        for (int i = 0; i < v.length; i++) {
+            for (int j = 0; j < v[0].length; j++) {
+                System.out.println(" [ "+v[i][j]+" ]");
+            }
+            
+        }
+    }
 //    public int update(Usuario p) {
 //        Connection conn = null;
 //        PreparedStatement stmt = null;

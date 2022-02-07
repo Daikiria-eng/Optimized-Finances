@@ -3,7 +3,7 @@
 
 $warning: rgba(255, 0, 0, 0.5);
 
-body{@include body_style(white);}
+body{@include body_style(v.$bg-color);}
 input{@include inputs}
 a{
     text-decoration: none;
@@ -11,7 +11,7 @@ a{
 }
 #corpse{
     margin: 2vw 6.5vw;
-    background: rgba(0,0,0,0.1);
+    background: v.$white_tpcy;
     justify-content: center;
     display: flex;
     flex-direction: row;
@@ -30,7 +30,7 @@ a{
 #menu{
     text-align: center;
     padding: 10px;
-    background-color: rgba(0,0,0,0.15);
+    background-color: v.$white_tpcy;
     ul{
         list-style: none;
         padding: 0;
@@ -78,7 +78,7 @@ a{
     &_arrow{@include arrow('right',black);}
 }
 #user_stats{
-    background-color: rgba(0,0,0,0.1);
+    background-color: v.$white_tpcy;
     margin: 1vw 2vw;
     padding: 1.5vw 2.6vw;
     border: {

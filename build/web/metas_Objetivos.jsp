@@ -17,6 +17,9 @@
     </head>
     <body>
         <nav></nav>
+        <div id="log_actions">
+
+        </div>
         <section>
             <center><h1>Metas y Objetivos</h1></center>
             <form action="Controlador2" method="POST">
@@ -74,8 +77,10 @@
                     type="submit" value="Registrar"
                     name="accion_M" 
                 />
+                <hr style="background-color: grey;height: 2px;width: 100%;border-style: double;"/>
             </form>
-        </section>
+            <a href="ver_acciones.jsp"><button>Ver acciones</button></a>
+        </section>        
         <script src="js/nav_bar.js"></script>
     </body>
 </html>
