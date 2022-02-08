@@ -60,7 +60,7 @@ BEGIN
 
     IF cur_day = period  THEN
         UPDATE salario SET actual = added WHERE id_usuario=id_user;
-    ELSEIF cur_day = 1 && DAY(CURRENT_DATE()-1) < 30 THEN 
+    ELSEIF cur_day = 1 AND DAY(CURRENT_DATE()-1) < 30 THEN 
         UPDATE salario SET actual = added WHERE id_usuario=id_user;
     END IF;
 END //
