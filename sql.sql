@@ -38,3 +38,31 @@ CREATE TABLE salario(
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )ENGINE=InnoDB;
+
+
+DELIMITER //
+
+CREATE PROCEDURE update_salary(
+    in id_user INT
+)
+BEGIN
+    DECLARE added BIGINT DEFAULT NULL;
+    DECLARE cur_day INT DEFAULT NULL;
+    DECLARE period INT;
+    DECLARE to_sum BIGINT;
+    DECLARE cur_salary BIGINT;
+
+    SELECT actual INTO cur_salary FROM salario WHERE id_usuario=id_user;
+    SELECT period INTO period FROM salario WHERE id_usuario=id_user;
+    SELECT valor INTO to_sum FROM salario WHERE id_usuario=id_user;
+    SET cur_day = DAY(CURRENT_DATE());
+    SET added = cur_salary + to_sum;
+
+    IF cur_day = period  THEN
+        UPDATE salario SET actual = added WHERE id_usuario=id_user;
+    ELSEIF cur_day = 1 && DAY(CURRENT_DATE()-1) < 30 THEN 
+        UPDATE salario SET actual = added WHERE id_usuario=id_user;
+    END IF;
+END //
+
+DELIMITER ;
