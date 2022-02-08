@@ -152,11 +152,7 @@ public class UsuarioJDBC implements Validar_Usuario{
         try {
             conn=Conexion.getConnection();
             System.out.println("Eliminando");
-            ps=conn.prepareStatement(
-                SQL_DELETE_USUARIO
-                //+"ALTER TABLE usuario AUTO_INCREMENT="+p.getIdCliente()+";"+
-                //"ALTER TABLE salario AUTO_INCREMENT="+p.getIdCliente()+";"
-            );
+            ps=conn.prepareStatement(SQL_DELETE_USUARIO);
             ps.setString(1, p.getIdCliente());
             return ps.execute();
         } catch (Exception e) {

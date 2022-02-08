@@ -12,6 +12,8 @@ public class AccionesJDBC implements Validar_Usuario{
 
 //    private static final String SQL_SELECT = "SELECT id_cliente, nombre, apellido, correo, clave FROM cliente";
     private static final String SQL_INSERT = "INSERT INTO acciones(tipo_acciones, descripcion, tipo_gasto, fecha_inicio, fecha_final,id_usuario,valor) VALUES(?, ?, ?, ?, ?, ?,?)";
+    private static final String SQL_DELETE_ACCION = "DELETE FROM acciones WHERE id_acciones=?;";
+    private static final String SQL_UPDATE = "UPDATE acciones SET tipo_acciones=?,descripcion=?,tipo_gasto=?,fecha_inicio=?,fecha_final=?,valor=? WHERE id_acciones=?;";
     
 //    private static final String SQL_UPDATE = "UPDATE cliente SET nombre=?, apellido=?, correo=?, telefono=? WHERE id_cliente = ?";
 //    private static final String SQL_DELETE = "DELETE FROM cliente WHERE id_cliente=?";
@@ -127,11 +129,11 @@ public class AccionesJDBC implements Validar_Usuario{
             conn=Conexion.getConnection();
             st=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             rs=st.executeQuery(
-                "SELECT tipo_acciones,descripcion,tipo_gasto,fecha_inicio,fecha_final,valor FROM acciones WHERE id_usuario="+id_usuario+";"
-                    );
+                "SELECT id_acciones,tipo_acciones,descripcion,tipo_gasto,fecha_inicio,fecha_final,valor FROM acciones WHERE id_usuario="+id_usuario+";"
+                );
             if(rs.last()){
                 size=rs.getRow();
-                actions_v=new String[size][6];
+                actions_v=new String[size][7];
                 System.out.println(size);
             }
             rs.first();
@@ -143,6 +145,7 @@ public class AccionesJDBC implements Validar_Usuario{
                 actions_v[i][3]=rs.getString("fecha_inicio");
                 actions_v[i][4]=rs.getString("fecha_final");
                 actions_v[i][5]=rs.getString("valor");
+                actions_v[i][6]=rs.getString("id_acciones");
                 i++;
             }while(rs.next());
 
@@ -158,15 +161,70 @@ public class AccionesJDBC implements Validar_Usuario{
         return null;
     }
 
+    public boolean eliminar_accion(Acciones acc){
+        Connection conn=null;
+        PreparedStatement ps=null;
+        try {
+            conn=Conexion.getConnection();
+            ps=conn.prepareStatement(SQL_DELETE_ACCION);
+            ps.setString(1, acc.getId_Acciones());
+
+            return ps.execute();
+        } catch (Exception e) {
+            System.out.println("Error eliminando acción:\n"+e);
+        }finally{
+            Conexion.close(conn);
+            Conexion.close(ps);
+        }
+
+        return false;
+    }
+
+    public boolean actualizar_acciones(Acciones acc){
+        PreparedStatement ps=null;
+        Connection conn=null;
+        try {
+        //UPDATE acciones SET tipo_acciones=?,descripcion=?,tipo_gasto=?
+        //,fecha_inicio=?,fecha_final=?,valor=? WHERE id_acciones=?;
+            conn=Conexion.getConnection();
+            ps=conn.prepareStatement(SQL_UPDATE);
+            ps.setString(1, acc.getTipo_Acciones());
+            ps.setString(2, acc.getDescripcion());
+            ps.setString(3, acc.getTipo_Gasto());
+            ps.setString(4, acc.getFecha_Inicio());
+            ps.setString(5, acc.getFecha_Final());
+            ps.setString(6, acc.getValor());
+            ps.setString(7, acc.getId_Acciones());
+            System.out.println("Ejecutando query:\n"+SQL_UPDATE);
+            int rows=ps.executeUpdate();
+            System.out.println("No error reported:\n"+rows);
+            return rows!=0;
+        } catch (Exception e) {
+            System.out.println("Error al actualizar acciones:\n"+e);
+        }finally{
+            Conexion.close(conn);
+            Conexion.close(ps);
+        }
+
+        return false;
+    }
     public static void main(String[] args){
         AccionesJDBC a=new AccionesJDBC();
-        String[][] v=a.getAcciones("3");
+        Acciones acc=new Acciones();
+        /*String[][] v=a.getAcciones("4");
         for (int i = 0; i < v.length; i++) {
             for (int j = 0; j < v[0].length; j++) {
                 System.out.println(" [ "+v[i][j]+" ]");
-            }
-            
-        }
+            }            
+        }*/
+        /*acc.setTipo_Acciones("gastico");
+        acc.setDescripcion("mecato");
+        acc.setTipo_Gasto("gastiquitico");
+        acc.setFecha_Inicio("2022-03-11");
+        acc.setFecha_Final("2022-04-12");
+        acc.setValor("300");
+        acc.setId_Acciones("2");
+        a.actualizar_acciones(acc);*/
     }
 //    public int update(Usuario p) {
 //        Connection conn = null;

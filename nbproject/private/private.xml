@@ -3,12 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/src/java/Modelo/Gestion_Salario/SalarioJDBC.java</file>
-            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/web/usuario.jsp</file>
-            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/src/java/Modelo/Gestion_Salario/Salario.java</file>
-            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/web/salario.jsp</file>
-            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/src/java/Controlador/Controlador_GestionUsers/Controlador.java</file>
-            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/src/java/Controlador/Controlador_GestionSalario/Controlador3.java</file>
+            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/src/java/Controlador/Controlador_GestionAcc/Controlador2.java</file>
+            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/web/modificar_objetivo_meta.jsp</file>
+            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/web/ver_acciones.jsp</file>
+            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/src/java/Controlador/Controlador_GestionUsers/Logout.java</file>
+            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/web/metas_Objetivos.jsp</file>
+            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/src/java/Modelo/Gestion_Acciones/AccionesJDBC.java</file>
         </group>
     </open-files>
 </project-private>

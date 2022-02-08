@@ -6,6 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    if(request.getSession().getAttribute("usuario")==null){
+        response.sendRedirect("Index.jsp");
+    }
+%>
+<%
     String nombre=(String) request.getSession().getAttribute("usuario");
     String salario=(String) request.getSession().getAttribute("salario_actual");
 %>
@@ -17,11 +22,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="Styles/nav_bar.css">
         <link rel="stylesheet" href="Styles/usuario.css">
-        <title>Dinero</title>
+        <title>Perfil</title>
     </head>
     <body>
         <nav></nav>
-        <center><h1><%out.print(nombre);%></h1></center>
+        <center><h1>${sessionScope.usuario}</h1></center>
         <div id="corpse">
             <div id="menu">
                 <ul>
@@ -45,7 +50,7 @@
             </div>
             <div id="user_stats">
                 <div id="cash_div">
-                    <h1 id="my_cash"><i>Su dinero: $</i> <%out.print(salario);%> <strong id="cash"></strong></h1>
+                    <h1 id="my_cash"><i>Su dinero: $</i> ${sessionScope.salario_actual} <strong id="cash"></strong></h1>
                     <div id="prev_subtract_label">
                         <label for="prev_subtract">                    
                             <i class="arrow" id="prev_subtract_arrow"></i>

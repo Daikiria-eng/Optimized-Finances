@@ -128,6 +128,7 @@ public class Controlador extends HttpServlet {
                     request.getSession().invalidate();
 
                     response.sendRedirect(request.getContextPath()+"/Index.jsp");
+                break;
             }
 //            case "Editar":
 //            {

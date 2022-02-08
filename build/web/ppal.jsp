@@ -5,7 +5,12 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%Object user_name=request.getSession().getAttribute("usuario");%>
+<%
+    String user_name=(String)request.getSession().getAttribute("usuario");
+    if(request.getSession().getAttribute("usuario")==null){ 
+        response.sendRedirect("Index.jsp");
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,7 +25,7 @@
         <nav></nav>
         <div class="main">
             <div class="utilities" id="user_utilities">
-                <h2><%out.print(user_name);%></h2 ><br/>
+                <h2>${sessionScope.usuario}</h2 ><br/>
                 <ol id="user_items">
                     <a href="metas_Objetivos.jsp"><li>Metas</li></a>
                     <a href="consejos.jsp"><li>Consejos</li></a>

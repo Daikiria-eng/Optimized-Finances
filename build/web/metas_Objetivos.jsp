@@ -5,6 +5,11 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%    
+    if(request.getSession().getAttribute("usuario")==null){ 
+        response.sendRedirect("Index.jsp");
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,13 +18,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="Styles/metas_Objetivos.css">
         <link rel="stylesheet" href="Styles/nav_bar.css">
-        <title>JSP Page</title>
+        <title>Metas u objetivos</title>
     </head>
     <body>
         <nav></nav>
-        <div id="log_actions">
-
-        </div>
         <section>
             <center><h1>Metas y Objetivos</h1></center>
             <form action="Controlador2" method="POST">
@@ -58,6 +60,7 @@
                 <input 
                     type="number" name="valor"
                     id="goal_cost" placeholder="valor de la acción"
+                    required
                 />
                 <label for="start">Fecha Inicial:</label>
                 <input 

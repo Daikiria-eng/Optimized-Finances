@@ -1,6 +1,7 @@
 <%
     if(request.getSession().getAttribute("usuario")!=null){
-        response.sendRedirect("ppal.jsp");}
+        response.sendRedirect("ppal.jsp");
+    }
 %>
 <!DOCTYPE html>
 <html lang="en">
