@@ -33,7 +33,7 @@
                     <a href="${pageContext.request.contextPath}/Logout"><li>Cerrar sesión</li></a>
                     <hr/>
                     <li>Cambiar nombres</li>
-                    <li>Cambiar salario</li>
+                    <a href="salario_modify.jsp"><li>Cambiar salario</li></a>
                     <li id="delete" onclick="active();">Eliminar cuenta</li>
                     <form method="POST" action="Controlador" id="sure_delete">
                         <h4>¿Seguro que desea eliminar su cuenta?</h4>
@@ -63,7 +63,7 @@
                         </label>
                         <h3 id="next_subtract">Próxima resta:<br/>   de: $ <br/>    En: </h3>                
                     </div>
-                    <form method="POST" action="" id="reload_salary">
+                    <form method="POST" action="Controlador3" id="reload_salary">
                         <input 
                             type="submit" name="accion"
                             id="refresh_salary"

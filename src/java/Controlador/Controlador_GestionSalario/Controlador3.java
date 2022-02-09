@@ -22,7 +22,6 @@ public class Controlador3 extends HttpServlet {
 
         String accion = request.getParameter("accion");
         switch (accion) {
-
             case "Anotado": {
                 Salario s = new Salario();
                 String valor = request.getParameter("valor");
@@ -34,7 +33,6 @@ public class Controlador3 extends HttpServlet {
                 s.setId_usuario(id_usuario);
                 s.setActual(salario_actual);
                 boolean sw=false;
-                System.out.println(valor + "\t" + periodo + "\t" + id_usuario + "\t" + salario_actual);
                 try {
                     if (salario_op.insertar_salario(s)) {
                         response.sendRedirect("ppal.jsp");
@@ -49,6 +47,40 @@ public class Controlador3 extends HttpServlet {
                 }
                 //response.sendRedirect("ppal.jsp");
                 break;
+            }
+
+            case "Actualizar":{
+                Salario s=new Salario();
+                String id_usuario=(String) request.getSession().getAttribute("id_usuario");
+                s.setId_usuario(id_usuario);
+                String salario_actual=null;
+                try {
+                    salario_actual=salario_op.actualizar_salario(s);
+                    System.out.println("Llegó el salario al controlador");
+                    if (salario_actual!=null) {
+                        request.getSession().setAttribute("id_salario", salario_actual);
+                        response.sendRedirect("usuario.jsp");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error actualizando salario:\n"+e);
+                }break;
+            }
+
+            case "Modificar":{
+                Salario s = new Salario();
+                String valor = request.getParameter("valor");
+                String periodo = request.getParameter("periodo");
+                String salario_actual=request.getParameter("salario_actual");
+                String id_usuario = (String) request.getSession().getAttribute("id_usuario");
+                s.setValor(valor);
+                s.setPeriodo(periodo);
+                s.setId_usuario(id_usuario);
+                s.setActual(salario_actual);
+                if(!salario_op.modificar_salario(s)){
+                    response.sendRedirect("usuario.jsp");
+                }else{
+                    response.sendRedirect("ppal.jsp");
+                }
             }
         }
     }

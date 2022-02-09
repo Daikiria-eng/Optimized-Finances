@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccionesJDBC implements Validar_Usuario{
-
+    private Nodo cab,ult,pp;
 //    private static final String SQL_SELECT = "SELECT id_cliente, nombre, apellido, correo, clave FROM cliente";
     private static final String SQL_INSERT = "INSERT INTO acciones(tipo_acciones, descripcion, tipo_gasto, fecha_inicio, fecha_final,id_usuario,valor) VALUES(?, ?, ?, ?, ?, ?,?)";
     private static final String SQL_DELETE_ACCION = "DELETE FROM acciones WHERE id_acciones=?;";
@@ -91,7 +91,6 @@ public class AccionesJDBC implements Validar_Usuario{
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
-        System.out.println("checkpoint on AccionesJDBC");
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
@@ -103,14 +102,11 @@ public class AccionesJDBC implements Validar_Usuario{
             stmt.setString(5, acciones.getFecha_Final());
             stmt.setString(6, acciones.getId_usuario());
             stmt.setString(7, acciones.getValor());
-
-            System.out.println("ejecutando query:" + SQL_INSERT);
             try {                
                 rows = stmt.executeUpdate();
             } catch (Exception e) {
                 System.out.println("Error en registro de acciones:\n"+e);
             }
-            System.out.println("Registros afectados:" + rows);
         } catch (SQLException ex) {
         } finally {
             Conexion.close(stmt);
@@ -120,6 +116,7 @@ public class AccionesJDBC implements Validar_Usuario{
     }
 
     public String[][] getAcciones(String id_usuario){
+        
         Connection conn=null;
         ResultSet rs=null;
         Statement st=null;
@@ -134,7 +131,6 @@ public class AccionesJDBC implements Validar_Usuario{
             if(rs.last()){
                 size=rs.getRow();
                 actions_v=new String[size][7];
-                System.out.println(size);
             }
             rs.first();
             int i=0;
@@ -184,8 +180,6 @@ public class AccionesJDBC implements Validar_Usuario{
         PreparedStatement ps=null;
         Connection conn=null;
         try {
-        //UPDATE acciones SET tipo_acciones=?,descripcion=?,tipo_gasto=?
-        //,fecha_inicio=?,fecha_final=?,valor=? WHERE id_acciones=?;
             conn=Conexion.getConnection();
             ps=conn.prepareStatement(SQL_UPDATE);
             ps.setString(1, acc.getTipo_Acciones());
@@ -195,9 +189,7 @@ public class AccionesJDBC implements Validar_Usuario{
             ps.setString(5, acc.getFecha_Final());
             ps.setString(6, acc.getValor());
             ps.setString(7, acc.getId_Acciones());
-            System.out.println("Ejecutando query:\n"+SQL_UPDATE);
             int rows=ps.executeUpdate();
-            System.out.println("No error reported:\n"+rows);
             return rows!=0;
         } catch (Exception e) {
             System.out.println("Error al actualizar acciones:\n"+e);
@@ -208,7 +200,7 @@ public class AccionesJDBC implements Validar_Usuario{
 
         return false;
     }
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         AccionesJDBC a=new AccionesJDBC();
         Acciones acc=new Acciones();
         /*String[][] v=a.getAcciones("4");
@@ -224,8 +216,8 @@ public class AccionesJDBC implements Validar_Usuario{
         acc.setFecha_Final("2022-04-12");
         acc.setValor("300");
         acc.setId_Acciones("2");
-        a.actualizar_acciones(acc);*/
-    }
+        a.getAcciones("2");
+    }*/
 //    public int update(Usuario p) {
 //        Connection conn = null;
 //        PreparedStatement stmt = null;

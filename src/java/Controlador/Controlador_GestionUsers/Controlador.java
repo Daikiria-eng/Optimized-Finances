@@ -70,7 +70,6 @@ public class Controlador extends HttpServlet {
                 }catch (Exception err){
                     System.out.println("ERror: "+err);
                 }
-                out.println("<script>alert(`Registro Exitoso`)</script>");
                 //request.getRequestDispatcher("Login.jsp").forward(request, response);
                 break;
             }
@@ -91,7 +90,6 @@ public class Controlador extends HttpServlet {
                     if(user_name!=null) {
                         request.getSession().setAttribute("id_usuario", user_name[0]);
                         request.getSession().setAttribute("usuario", user_name[1]);
-                        System.out.print("Checkpoint on Controlador\t"+user_name[0]+"\t"+user_name[1]);
                         s.setId_usuario(user_name[0]);
 
                         try {
@@ -101,10 +99,8 @@ public class Controlador extends HttpServlet {
                         }
 
                         if(salario_v!=null){
-                            System.out.print(salario_v[0]+"\t"+salario_v[1]);
                             request.getSession().setAttribute("salario_actual", salario_v[0]);
                             request.getSession().setAttribute("salario_periodo", salario_v[1]);
-                            System.out.println("checkpoint");
                             response.sendRedirect("ppal.jsp");
                         }else{response.sendRedirect("salario.jsp");}
                     } else {response.sendRedirect(request.getContextPath()+"/Login.jsp");}

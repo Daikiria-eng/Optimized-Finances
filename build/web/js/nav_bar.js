@@ -6,7 +6,7 @@ let nav=
         <input id="nav_deploy" type="checkbox" />
     </label>
     <ul>
-        <a href="dinero.jsp"><li>Dinero</li></a>
+        <a href="usuario.jsp"><li>Dinero</li></a>
         <a href="metas_Objetivos.jsp"><li>Egresos</li></a>
         <a href="consejos.jsp"><li>Consejos</li></a>
     </ul>

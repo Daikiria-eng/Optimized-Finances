@@ -96,9 +96,7 @@ public class UsuarioJDBC implements Validar_Usuario{
             stmt.setString(2, persona.getCorreo());
             stmt.setString(3, persona.getClave());
 
-            System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
         } catch (SQLException ex) {
         } finally {
             Conexion.close(stmt);
@@ -124,7 +122,6 @@ public class UsuarioJDBC implements Validar_Usuario{
                     size=rs.getRow();
                     id_name=new String[size+1];
                 }else{
-                    System.out.println("Error # Nada"); 
                     return null;
                 }
                 rs.first();
@@ -151,7 +148,6 @@ public class UsuarioJDBC implements Validar_Usuario{
         PreparedStatement ps=null;
         try {
             conn=Conexion.getConnection();
-            System.out.println("Eliminando");
             ps=conn.prepareStatement(SQL_DELETE_USUARIO);
             ps.setString(1, p.getIdCliente());
             return ps.execute();

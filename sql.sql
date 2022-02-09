@@ -58,10 +58,14 @@ BEGIN
     SET cur_day = DAY(CURRENT_DATE());
     SET added = cur_salary + to_sum;
 
-    IF cur_day = period  THEN
+    IF MOD(cur_day, period) = 0 THEN
         UPDATE salario SET actual = added WHERE id_usuario=id_user;
+        SELECT actual FROM salario WHERE id_usuario=id_user;
     ELSEIF cur_day = 1 AND DAY(CURRENT_DATE()-1) < 30 THEN 
         UPDATE salario SET actual = added WHERE id_usuario=id_user;
+        SELECT actual FROM salario WHERE id_usuario=id_user;
+    ELSE
+        SELECT actual FROM salario WHERE id_usuario=id_user;
     END IF;
 END //
 

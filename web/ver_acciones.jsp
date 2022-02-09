@@ -5,16 +5,19 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="Modelo.Gestion_Acciones.AccionesJDBC"%>
+<%@page import="Modelo.Gestion_Acciones.*"%>
 <%
     if(request.getSession().getAttribute("usuario")==null){ 
         response.sendRedirect("Index.jsp");
     }
-    
-    AccionesJDBC a=new AccionesJDBC();
+    //AccionesJDBC a=new AccionesJDBC();
     String empty="<h2>Aún no has registrado alguna acción<br/>O no tienes algún gasto pendiente</h2>";
     String id_usuario=(String) request.getSession().getAttribute("id_usuario");
-    String[][] actions_v=a.getAcciones(id_usuario);
+    op_acciones op_a=new op_acciones(id_usuario);
+    //String[][] actions_v=a.getAcciones(id_usuario);
+    op_a.llenar_lista();
+    op_a.imprimir_lista_consola();
+    String[][] actions_v=op_a.obtener_acciones_l();
     request.getSession().setAttribute("vector_acciones", actions_v);
 %>
 <!DOCTYPE html>
@@ -121,7 +124,7 @@
                                 />
                             </div>
                         </form>
-                <%      System.out.println(i);
+                <%
                     }
                 }else{
                     out.print(empty);

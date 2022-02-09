@@ -12,6 +12,7 @@ import java.sql.Statement;
  */
 public class SalarioJDBC {
     private static final String SQL_INSERT_SALARIO="INSERT INTO salario (valor,actual,periodo,id_usuario) VALUES (?,?,?,?);";
+    private static final String SQL_UPDATE_SALARIO="UPDATE salario SET valor=?,actual=?,periodo=? WHERE id_usuario=?;";
 
     public boolean insertar_salario(Salario s) {
         Connection conn = null;
@@ -24,7 +25,6 @@ public class SalarioJDBC {
             ps.setString(2, s.getActual());
             ps.setString(3, s.getPeriodo());
             ps.setString(4, s.getId_usuario());
-            System.out.println("Inserting:\n" + SQL_INSERT_SALARIO);
             r=ps.executeUpdate();
             if (r!=0) {
                 System.out.println("Insertado");
@@ -46,13 +46,11 @@ public class SalarioJDBC {
         String[] salario_v;
         int size = 0;
         //String id=id_usuario[0];
-        System.out.println("id_usuario = " + s.getId_usuario());
         try {
             conn = Conexion.getConnection();
             st = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             rs = st.executeQuery("SELECT actual,periodo FROM salario WHERE id_usuario=" + s.getId_usuario() + ";");
             if (rs.last()) {
-                System.out.println(rs);
                 size = rs.getRow();
                 salario_v = new String[size+1];
             } else {
@@ -76,4 +74,54 @@ public class SalarioJDBC {
         return null;
     }
 
+    public String actualizar_salario(Salario s){
+        Connection conn=null;
+        Statement st=null;
+        ResultSet rs=null;
+        String actual=null;
+        try {
+            conn=Conexion.getConnection();
+            st=st = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            System.out.println("Actualizando salario");
+            rs=st.executeQuery("call update_salary("+s.getId_usuario()+");");
+            rs.first();
+            System.out.println("Salario actualizadof");
+            actual=rs.getString("actual");
+            if(actual!=null){
+                System.out.println("Salario actualizado");
+                return actual;
+            }
+            else return null;
+        } catch (Exception e) {
+            System.out.println("Error actualizando:\n"+e);
+            e.printStackTrace();
+        }finally{
+            Conexion.close(st);
+            Conexion.close(conn);
+            Conexion.close(rs);
+        }
+       
+        return null;
+    }
+
+    public boolean modificar_salario(Salario s){
+        Connection conn=null;
+        PreparedStatement ps=null;
+//private static final String SQL_UPDATE_SALARIO="UPDATE salario 
+//SET valor=?,actual=?,periodo=? WHERE id_usuario=?;";
+        try {
+            conn=Conexion.getConnection();
+            ps=conn.prepareStatement(SQL_UPDATE_SALARIO);
+            ps.setString(1, s.getValor());
+            ps.setString(2, s.getActual());
+            ps.setString(3, s.getPeriodo());
+            ps.setString(4, s.getId_usuario());
+
+            return ps.execute();
+        } catch (Exception e) {
+            System.out.println("Error al actualizar salario:\n"+e);
+        }
+
+        return false;
+    }
 }
