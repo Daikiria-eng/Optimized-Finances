@@ -3,13 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/src/java/Modelo/Gestion_Salario/SalarioJDBC.java</file>
-            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/src/java/Modelo/Gestion_Acciones/op_acciones.java</file>
-            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/web/ver_acciones.jsp</file>
-            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/web/usuario.jsp</file>
-            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/web/salario_modify.jsp</file>
-            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/web/js/nav_bar.js</file>
-            <file>file:/home/user/Documents/NetBeansProjects/Optimized-Finances/src/java/Modelo/Gestion_Acciones/Nodo.java</file>
+            <file>file:/home/user/Documents/NetBeansProjects/ozf_bk/Optimized-Finances/src/java/Controlador/Controlador_GestionUsers/Controlador.java</file>
+            <file>file:/home/user/Documents/NetBeansProjects/ozf_bk/Optimized-Finances/src/java/Controlador/Controlador_GestionAcc/Controlador2.java</file>
         </group>
     </open-files>
 </project-private>

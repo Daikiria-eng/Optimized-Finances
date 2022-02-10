@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+/*import jakarta.servlet.*;
+import jakarta.servlet.http.*;*/
 
 /**
  *
@@ -56,9 +58,11 @@ public class Controlador3 extends HttpServlet {
                 String salario_actual=null;
                 try {
                     salario_actual=salario_op.actualizar_salario(s);
-                    System.out.println("Llegó el salario al controlador");
+                    System.out.println("Checkpoint en Controlador3 salario: "+salario_actual);
+                request.getSession().removeAttribute("salario_salario");
                     if (salario_actual!=null) {
-                        request.getSession().setAttribute("id_salario", salario_actual);
+                        request.getSession().setAttribute("salario_salario", salario_actual);
+                        System.out.println(request.getSession().getAttribute("salario_actual"));
                         response.sendRedirect("usuario.jsp");
                     }
                 } catch (Exception e) {
@@ -77,6 +81,7 @@ public class Controlador3 extends HttpServlet {
                 s.setId_usuario(id_usuario);
                 s.setActual(salario_actual);
                 if(!salario_op.modificar_salario(s)){
+                    //request.getSession().setAttribute("salario_actual", salario_actual);
                     response.sendRedirect("usuario.jsp");
                 }else{
                     response.sendRedirect("ppal.jsp");

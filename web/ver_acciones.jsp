@@ -16,7 +16,6 @@
     op_acciones op_a=new op_acciones(id_usuario);
     //String[][] actions_v=a.getAcciones(id_usuario);
     op_a.llenar_lista();
-    op_a.imprimir_lista_consola();
     String[][] actions_v=op_a.obtener_acciones_l();
     request.getSession().setAttribute("vector_acciones", actions_v);
 %>

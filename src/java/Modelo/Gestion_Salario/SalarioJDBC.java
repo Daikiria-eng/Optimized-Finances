@@ -89,6 +89,7 @@ public class SalarioJDBC {
             actual=rs.getString("actual");
             if(actual!=null){
                 System.out.println("Salario actualizado");
+                System.out.println(actual);
                 return actual;
             }
             else return null;
@@ -107,8 +108,6 @@ public class SalarioJDBC {
     public boolean modificar_salario(Salario s){
         Connection conn=null;
         PreparedStatement ps=null;
-//private static final String SQL_UPDATE_SALARIO="UPDATE salario 
-//SET valor=?,actual=?,periodo=? WHERE id_usuario=?;";
         try {
             conn=Conexion.getConnection();
             ps=conn.prepareStatement(SQL_UPDATE_SALARIO);

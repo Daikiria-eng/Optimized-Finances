@@ -1,60 +1,39 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package Controlador.Controlador_GestionUsers;
 
 import Modelo.*;
 import Modelo.Gestion_Salario.*;
-import java.io.*;
-//import java.util.*;
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-//import javax.servlet.http.HttpSession;
-import javax.servlet.http.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+/*import jakarta.servlet.*;
+import jakarta.servlet.http.*/
 
-@WebServlet("/Controlador")
+/**
+ *
+ * @author daykiria
+ */
 public class Controlador extends HttpServlet {
-
+    
     UsuarioJDBC persona_OP = new UsuarioJDBC();
     Usuario persona = new Usuario();
     SalarioJDBC salario_op=new SalarioJDBC();
+    
     int r = 0;
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    PrintWriter out = response.getWriter();
-
-        String accion = request.getParameter("accion");
+        PrintWriter out = response.getWriter();
+        
+                String accion = request.getParameter("accion");
 
         switch (accion) {
-
-//            case "Ver Datos":
-//            case "Atras": {
-//                request.getRequestDispatcher("Form.jsp").forward(request, response);
-//            }
-//            break;
-//            case "Salir": {
-//                request.getRequestDispatcher("sign_in.jsp").forward(request, response);
-//            }
-//            break;
-            
-//            case "Listar": {
-//                List<Persona> datos;
-//                datos = persona_OP.select();
-//                request.setAttribute("datos", datos);
-//                request.getRequestDispatcher("Form.jsp").forward(request, response);
-//            }
-//            break;
-
             case "Registrate":{
                 Usuario p = new Usuario();
                 String nom = request.getParameter("nombres");
@@ -112,7 +91,6 @@ public class Controlador extends HttpServlet {
                 }*/   
                 break;
             }
-
             
             case "Eliminar":{
                 Usuario p=new Usuario();
@@ -126,48 +104,45 @@ public class Controlador extends HttpServlet {
                     response.sendRedirect(request.getContextPath()+"/Index.jsp");
                 break;
             }
-//            case "Editar":
-//            {
-//                String id = request.getParameter("id");
-//                Usuario pe = persona_OP.listarID(id);
-//                request.setAttribute("persona", pe);
-//                request.getRequestDispatcher("update.jsp").forward(request, response);
-//                
-//            }
-//            break;
-//            case "Actualizar":
-//            {
-//                String id = request.getParameter("id");
-//                String nom = request.getParameter("nombre");
-//                String apell = request.getParameter("apellido");
-//                String correo = request.getParameter("correo");
-//                String clave = request.getParameter("contra");
-//                
-//                persona.setIdCliente(id);
-//                persona.setNombre(nom);
-//                persona.setApellido(apell);
-//                persona.setCorreo(correo);
-//                persona.setClave(clave);
-//                
-//                persona_OP.update(persona);
-//               request.getRequestDispatcher("sign_in.jsp").forward(request, response);
-//               
-//            }
-//             break;
-             
-//            case "Eliminar":
-//            {
-//                String id = request.getParameter("id");
-//                persona.setIdCliente(id);
-//                persona_OP.delete(persona);
-//                request.getRequestDispatcher("sign_in.jsp").forward(request, response);
-//            }
-//            break;
-//            default:
-//                throw new AssertionError();
         }
-
+        
+        //response.sendRedirect("Index.jsp");
     }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";
