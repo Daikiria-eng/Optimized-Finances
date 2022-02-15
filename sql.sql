@@ -6,19 +6,47 @@ CREATE TABLE usuario(
     PRIMARY KEY(id_usuario)
 )ENGINE=InnoDB;
 
-CREATE TABLE acciones(
-    id_acciones INT AUTO_INCREMENT NOT NULL,
-    tipo_acciones VARCHAR(45) NOT NULL,
-    descripcion VARCHAR(200) NOT NULL,
-    tipo_gasto VARCHAR(45) NOT NULL,
+CREATE TABLE gastos(
+    id_gasto INT NOT NULL AUTO_INCREMENT,
+    titulo VARCHAR(20) NOT NULL,
+    precio BIGINT NOT NULL,
+    fecha DATE NOT NULL,
+    id_usuario INT NOT NULL,
+    PRIMARY KEY (id_gasto),
+    INDEX (id_usuario),
+    CONSTRAINT fk_gastos
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuario(id_usuario)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+)ENGINE=InnoDB;
+
+CREATE TABLE ahorros(
+    id_ahorro INT NOT NULL AUTO_INCREMENT,
+    titulo VARCHAR(50),
+    valor BIGINT NOT NULL,
     fecha_inicio DATE,
     fecha_final DATE NOT NULL,
-    valor BIGINT NOT NULL,
     id_usuario INT NOT NULL,
     INDEX (id_usuario),
-    PRIMARY KEY(id_acciones),
-    CONSTRAINT fk_acciones
-    FOREIGN KEY (id_usuario) 
+    PRIMARY KEY (id_ahorro),
+    CONSTRAINT fk_ahorros
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuario(id_usuario)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+)ENGINE=InnoDB;
+
+CREATE TABLE metas(
+    id_meta INT NOT NULL AUTO_INCREMENT,
+    titulo VARCHAR(50),
+    precio BIGINT NOT NULL,
+    fecha_final DATE NOT NULL,
+    id_usuario INT NOT NULL,
+    PRIMARY KEY (id_meta),
+    INDEX(id_usuario),
+    CONSTRAINT fk_meta
+    FOREIGN KEY (id_usuario)
     REFERENCES usuario(id_usuario)
     ON DELETE CASCADE
     ON UPDATE CASCADE
