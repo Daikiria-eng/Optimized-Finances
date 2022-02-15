@@ -1,19 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Controlador.Controlador_GestionUsers;
 
 import Modelo.*;
 import Modelo.Gestion_Salario.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
+/*import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-/*import jakarta.servlet.*;
-import jakarta.servlet.http.*/
+import javax.servlet.http.HttpServletResponse;*/
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 
 /**
  *
@@ -69,6 +65,7 @@ public class Controlador extends HttpServlet {
                     if(user_name!=null) {
                         request.getSession().setAttribute("id_usuario", user_name[0]);
                         request.getSession().setAttribute("usuario", user_name[1]);
+                        request.getSession().setAttribute("usuario_correo", user_name[2]);
                         s.setId_usuario(user_name[0]);
 
                         try {

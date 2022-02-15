@@ -4,13 +4,13 @@ import Modelo.Gestion_Acciones.*;
 import java.io.IOException;
 import static java.lang.System.out;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
+/*import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-/*import jakarta.servlet.*;
-import jakarta.servlet.http.*;*/
+import javax.servlet.http.HttpServletResponse;*/
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 
 /**
  *
@@ -26,89 +26,72 @@ public class Controlador2 extends HttpServlet {
 
         String accion = request.getParameter("accion_M");
         
-        switch (accion) {            
-            case "Registrar":{
-                Acciones acc = new Acciones();
-                String opc1 = request.getParameter("opciones1");
-                String des = request.getParameter("descripcion");
-                String opc2 = request.getParameter("opciones2");
-                String fecha1 = request.getParameter("fecha_Ini");
-                String fecha2 = request.getParameter("fecha_Fin");
-                String id_usuario=(String) request.getSession().getAttribute("id_usuario");
-                String valor=request.getParameter("valor");
-                
-                acc.setTipo_Acciones(opc1);
-                acc.setDescripcion(des);
-                acc.setTipo_Gasto(opc2);
-                acc.setFecha_Inicio(fecha1);
-                acc.setFecha_Final(fecha2);
-                acc.setId_usuario(id_usuario);
-                acc.setValor(valor);
-                try{
-                    acc_op.insert(acc);
-                    response.sendRedirect("metas_Objetivos.jsp");
-                }catch (Exception err){
-                    System.out.println("Error registrando acciones: "+err);
-                }
-                out.println("End");
-                break;
-            }
-
-            case "Eliminar":{
-                Acciones acc = new Acciones();
-                System.out.println("Eliminar");
-                String id_accion=request.getParameter("id_accion");
-                acc.setId_Acciones(id_accion);
-                if(acc_op.eliminar_accion(acc)){
-                    response.sendRedirect("ver_acciones.jsp");                    
-                }else{
-                    response.sendRedirect("ppal.jsp");
-                }
-                break;
-            }
-
-            case "Modificar":{
+        switch (accion) {
+            case "Ingresar meta":{
                 Acciones acc=new Acciones();
-                String id_accion=request.getParameter("id_accion");
-                request.getSession().setAttribute("id_accion_v",id_accion);
-                response.sendRedirect("modificar_objetivo_meta.jsp");
-                break;
+                String tipo_accion=request.getParameter("tipo_accion");
+                String titulo=request.getParameter("titulo");
+                String meta_valor=request.getParameter("meta_valor");
+                String fecha=request.getParameter("meta_fecha");
+                
+                acc.setTipo_Acciones(tipo_accion);
+                acc.setId_usuario((String) request.getSession().getAttribute("id_usuario"));
+                acc.setTitulo(titulo);
+                acc.setValor(meta_valor);
+                acc.setFecha_Final(fecha);
+                try {
+                    if(!acc_op.insertar_meta(acc))
+                        response.sendRedirect("metas_Objetivos.jsp");
+                    else
+                        response.sendRedirect("ppal.jsp");
+                } catch (Exception e) {
+                    System.out.println("Error: insertarndo meta: controlador2:\n"+e);
+                }
+            }
+            case "Ingresar gasto":{
+                Acciones acc=new Acciones();
+                String tipo_accion=request.getParameter("tipo_accion");
+                String titulo=request.getParameter("titulo");
+                String meta_valor=request.getParameter("meta_valor");
+                String fecha=request.getParameter("fecha_gasto");
+                
+                acc.setTipo_Acciones(tipo_accion);
+                acc.setTitulo(titulo);
+                acc.setValor(meta_valor);
+                acc.setFecha_Final(fecha);
+                acc.setId_usuario((String) request.getSession().getAttribute("id_usuario"));
+                try {
+                    if(!acc_op.insertar_gasto(acc))
+                        response.sendRedirect("metas_Objetivos.jsp");
+                    else
+                        response.sendRedirect("ppal.jsp");
+                } catch (Exception e) {
+                    System.out.println("Error: insertando gasto: controlador2:\n"+e);
+                }                
             }
             
-            case "Confirmar":{
-                Acciones acc = new Acciones();
-                String opc1 = request.getParameter("opciones1");
-                String des = request.getParameter("descripcion");
-                String opc2 = request.getParameter("opciones2");
-                String fecha1 = request.getParameter("fecha_Ini");
-                String fecha2 = request.getParameter("fecha_Fin");
-                //String id_usuario=(String) request.getSession().getAttribute("id_usuario");
-                String valor=request.getParameter("valor");                
+            case "Ingresar ahorro":{
+                Acciones acc=new Acciones();
+                String tipo_accion=request.getParameter("tipo_accion");
+                String titulo=request.getParameter("titulo");
+                String meta_valor=request.getParameter("meta_valor");
+                String fecha_inicio=request.getParameter("ahorro_fecha");
+                String fecha_final=request.getParameter("ahorro_fecha_final");
                 
-                acc.setTipo_Acciones(opc1);
-                acc.setDescripcion(des);
-                acc.setTipo_Gasto(opc2);
-                acc.setFecha_Inicio(fecha1);
-                acc.setFecha_Final(fecha2);
-                //acc.setId_usuario(id_usuario);
-                acc.setValor(valor);
-                acc.setId_Acciones((String)
-                    request.getSession().getAttribute("id_accion_v"));
-                try{
-                    if(acc_op.actualizar_acciones(acc)){
-                        request.getSession().removeAttribute("id_accion_v");
-                        request.getSession().removeAttribute("vector_acciones");
-                        response.sendRedirect("ver_acciones.jsp");
-                    }else{
-                        request.getSession().removeAttribute("id_accion_v");
-                        request.getSession().removeAttribute("vector_acciones");
+                acc.setTipo_Acciones(tipo_accion);
+                acc.setTitulo(titulo);
+                acc.setValor(meta_valor);
+                acc.setFecha_Inicio(fecha_inicio);
+                acc.setFecha_Final(fecha_final);
+                acc.setId_usuario((String) request.getSession().getAttribute("id_usuario"));
+                try {
+                    if(!acc_op.insertar_ahorro(acc))
+                        response.sendRedirect("metas_Objetivos.jsp");
+                    else
                         response.sendRedirect("ppal.jsp");
-                    }
-                }catch (Exception err){
-                    System.out.println("Error registrando acciones: "+err);
+                } catch (Exception e) {
+                    System.out.println("Error: insertando ahorro: controlador2:\n"+e);
                 }
-                out.println("End");
-                break;
             }
             default:
                 //throw new AssertionError();

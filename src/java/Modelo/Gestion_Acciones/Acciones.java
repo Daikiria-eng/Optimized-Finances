@@ -1,19 +1,15 @@
 package Modelo.Gestion_Acciones;
 
 public class Acciones {
-
     String id_Acciones;
     String tipo_Acciones;
-    String descripcion;
-    String tipo_Gasto;
+    String titulo;
     String fecha_Inicio;
     String fecha_Final;
     String id_usuario;
     String valor;
 
-    public Acciones() {
-
-    }
+    public Acciones() {}
 
     public Acciones(String id_Acciones) {
         this.id_Acciones = id_Acciones;
@@ -21,8 +17,7 @@ public class Acciones {
 
     public Acciones(String tipo_Acciones, String descripcion, String tipo_Gasto, String fecha_Inicio, String fecha_Final, String id_usuario) {
         this.tipo_Acciones = tipo_Acciones;
-        this.descripcion = descripcion;
-        this.tipo_Gasto = tipo_Gasto;
+        this.titulo = titulo;
         this.fecha_Inicio = fecha_Inicio;
         this.fecha_Final = fecha_Final;
         this.id_usuario=id_usuario;
@@ -45,20 +40,12 @@ public class Acciones {
         this.tipo_Acciones = tipo_Acciones;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getTipo_Gasto() {
-        return tipo_Gasto;
-    }
-
-    public void setTipo_Gasto(String tipo_Gasto) {
-        this.tipo_Gasto = tipo_Gasto;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getFecha_Inicio() {
@@ -93,6 +80,6 @@ public class Acciones {
 
     @Override
     public String toString() {
-        return "Acciones{" + "id_Acciones=" + id_Acciones + ", tipo_Acciones=" + tipo_Acciones + ", descripcion=" + descripcion + ", tipo_Gasto=" + tipo_Gasto + ", fecha_Inicio=" + fecha_Inicio + ", fecha_Final=" + fecha_Final + '}';
+        return "Acciones{" + "id_Acciones=" + id_Acciones + ", tipo_Acciones=" + tipo_Acciones + ", descripcion=" + titulo + ", fecha_Inicio=" + fecha_Inicio + ", fecha_Final=" + fecha_Final + '}';
     }
 }
