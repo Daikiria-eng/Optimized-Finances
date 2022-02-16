@@ -1,8 +1,6 @@
 @use 'variables' as v;
 @use 'mixins' as *;
 
-$warning: rgba(255, 0, 0, 0.5);
-
 body{@include body_style(v.$bg-color);}
 input{@include inputs}
 a{
@@ -46,7 +44,7 @@ a{
             color: red !important;
             &:hover{
                 color: black !important;
-                background-color: $warning !important;
+                background-color: v.$warning !important;
             }
         }
     }
@@ -97,7 +95,7 @@ a{
 }
 #sure_delete{
     display: none;
-    background-color: $warning;
+    background-color: v.$warning;
     padding: 5px 10px;
     margin: 5px;
     border-radius: 10px;

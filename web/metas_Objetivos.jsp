@@ -175,7 +175,8 @@
                             value="Ingresar ahorro"
                         />
                     </div>
-                </form>                
+                </form>
+                <a href="ver_acciones.jsp"><button style="max-width: 6%; margin: 40px;">Ver acciones</button></a>
             </div>
         </section>
         <script>

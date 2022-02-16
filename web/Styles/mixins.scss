@@ -43,8 +43,8 @@
     border-radius: 5px;
     &:hover{
         cursor: pointer;
-        background: v.$darker;
-        color: black;
+        background: v.$bg_hover;
+        color: white;
     }
 }
 @mixin inputs{
@@ -67,19 +67,19 @@
 @mixin nav_bar{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     text-align: center;
     color: white;
     background: v.$backgrounds;
     box-shadow: v.$box-shadow;
     list-style: none;
-    max-width: 100%;
+    //max-width: 100%;
     padding: 0 6px;
     img,p,a{margin: 0}
-    img{width: 4.5vw}
     a{
         text-decoration: none;
         color: white;
+        padding: 0;
     }
     ul{
         background: v.$backgrounds;

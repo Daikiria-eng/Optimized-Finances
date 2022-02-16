@@ -37,20 +37,16 @@ public class UsuarioJDBC implements Validar_Usuario{
         //PreparedStatement stmt=null;
         ResultSet rs=null;
         Statement st=null;
-        String[] id_name={};
+        String id_name[]=new String[3];
         int size=0;
 
         try{
             conn=Conexion.getConnection();
             st=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             try {
-                rs=st.executeQuery("SELECT id_usuario,nombres,correo FROM usuario WHERE correo='"+persona.getCorreo()+"' AND clave='"+persona.getClave()+"';");
-                if(rs.last()){
-                    size=rs.getRow();
-                    id_name=new String[size+1];
-                }else{
-                    return null;
-                }
+                rs=st.executeQuery(
+                    "SELECT id_usuario,nombres,correo FROM usuario WHERE correo='"+persona.getCorreo()+"' AND clave='"+persona.getClave()+"';"
+                );
                 rs.first();
                 id_name[0]=rs.getString("id_usuario");
                 id_name[1]=rs.getString("nombres");

@@ -24,7 +24,7 @@ public class Controlador2 extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        String accion = request.getParameter("accion_M");
+        String accion = request.getParameter("accion");
         
         switch (accion) {
             case "Ingresar meta":{
@@ -40,13 +40,14 @@ public class Controlador2 extends HttpServlet {
                 acc.setValor(meta_valor);
                 acc.setFecha_Final(fecha);
                 try {
-                    if(!acc_op.insertar_meta(acc))
+                    if(acc_op.insertar_meta(acc))
                         response.sendRedirect("metas_Objetivos.jsp");
                     else
                         response.sendRedirect("ppal.jsp");
                 } catch (Exception e) {
                     System.out.println("Error: insertarndo meta: controlador2:\n"+e);
                 }
+                break;
             }
             case "Ingresar gasto":{
                 Acciones acc=new Acciones();
@@ -61,13 +62,14 @@ public class Controlador2 extends HttpServlet {
                 acc.setFecha_Final(fecha);
                 acc.setId_usuario((String) request.getSession().getAttribute("id_usuario"));
                 try {
-                    if(!acc_op.insertar_gasto(acc))
+                    if(acc_op.insertar_gasto(acc))
                         response.sendRedirect("metas_Objetivos.jsp");
                     else
                         response.sendRedirect("ppal.jsp");
                 } catch (Exception e) {
                     System.out.println("Error: insertando gasto: controlador2:\n"+e);
-                }                
+                }
+                break;
             }
             
             case "Ingresar ahorro":{
@@ -85,14 +87,24 @@ public class Controlador2 extends HttpServlet {
                 acc.setFecha_Final(fecha_final);
                 acc.setId_usuario((String) request.getSession().getAttribute("id_usuario"));
                 try {
-                    if(!acc_op.insertar_ahorro(acc))
+                    if(acc_op.insertar_ahorro(acc))
                         response.sendRedirect("metas_Objetivos.jsp");
                     else
                         response.sendRedirect("ppal.jsp");
                 } catch (Exception e) {
                     System.out.println("Error: insertando ahorro: controlador2:\n"+e);
                 }
+                break;
             }
+            
+            case "Eliminar":{
+                Acciones acc=new Acciones();
+                String id_accion=(String) request.getParameter("id_accion");
+                String[] nombre=id_accion.split("_");
+                acc.setTipo_Acciones(nombre[1]);
+                acc.setId_Acciones(id_accion);
+                acc_op.eliminar_accion(acc);
+            }break;
             default:
                 //throw new AssertionError();
                 break;

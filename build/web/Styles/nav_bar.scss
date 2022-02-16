@@ -3,4 +3,17 @@
 nav{
     @include nav_bar;
     input[type=checkbox]{ display: none }
+    #a_logo{padding-top: 1%;}
+    #a_user_image{padding-top: 0.4%;}
+    #logo{
+        padding-top: 20px;
+        width: 200px;
+        margin: 0;
+        padding: 0;
+    }
+    #user_img{
+        width: 50px;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
 }

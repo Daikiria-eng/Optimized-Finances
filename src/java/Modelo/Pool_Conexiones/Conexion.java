@@ -19,9 +19,6 @@ public class Conexion {
         }
         return con;
     }
-    /*public static void main(String[] args) throws ClassNotFoundException{
-        getConnection();
-    }*/
     
     public static void close(ResultSet rs){
         try {

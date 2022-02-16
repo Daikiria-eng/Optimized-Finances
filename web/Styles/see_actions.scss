@@ -2,6 +2,13 @@
 @use 'mixins' as *;
 @use 'usuario' as u;
 
+$titles: 'goals', 'expends', 'savings';
+
+@mixin flex_column{
+    display: flex;
+    flex-direction: column;
+}
+
 body{@include body_style(v.$bg-color);}
 input{
     @include inputs;
@@ -12,66 +19,104 @@ input{
         padding: 8px !important; 
     }
 }
+.delete_action{
+    background-color: v.$warning !important;
+    &:hover{
+        background-color: red !important;
+    }
+}
 #corpse{
-    display: flex;
-    flex-direction: column;
+    @include flex_column();
     background-color: v.$white_tpcy;
     margin: 1vw 1.5vw;
     padding: 0.5vw 1vw;
     border-radius: 10px;
 }
+.title_action{
+    border-bottom: solid 2px v.$backgrounds;
+}
 #print_cards{
     margin: 0px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.cards{
-    background-color: white;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 10px;
-    box-shadow: v.$box_shadow;
     display: grid;
     grid-template-columns: auto auto auto;
-    grid-template-rows: repeat(7, auto);
+    grid-template-rows: auto auto;
+    justify-content: space-around;
+    width: 100%;
 }
-.cards_labels{
-    display: grid;
-    grid-template-rows: repeat(7, auto);
-    justify-content: right;
-    text-align: right;
-    grid-column: 1/2;
-    margin: 5px 10px;
-    label{
-        padding: 6% 0;
+$i: 1;
+@each $title in $titles{
+    #title_#{$title}{
+        grid-column: #{$i}/#{$i+1};
+        grid-row: 1/2;
+    }
+    $i: $i+1;
+}
+.actions{
+    @include flex_column();
+    margin:2px;
+    .action_form{
+        display: flex;
+        margin: 2px 5px;
+        flex-direction: row;
+        background-color: v.$white_tpcy;
+        padding: 2px 10px;
+        .labels{
+            @include flex_column();
+            text-align: right;
+            label{
+                margin: 4px;
+            }
+        }
+        .inputs{
+            @include flex_column();
+        }
     }
 }
-.cards_inputs{
-    display: grid;
-    grid-template-rows: repeat(7, auto);
-    justify-content: left;
-    text-align: left;
-    grid-column: 2/3;
+@media (max-width: 1042px) {
+    #print_cards{
+        grid-template-columns: 39vw 39vw;//auto auto;
+        grid-template-rows: repeat(4, auto);
+    }
+    #title_goals{
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+    #goals{
+        grid-column: 1/2;
+        grid-row: 2/3;
+    }
+    #title_expends{
+        grid-column: 2/3;
+        grid-row: 1/2;
+    }
+    #expends{
+        grid-column: 2/3;
+        grid-row: 2/5;
+    }
+    #title_savings{
+        grid-column: 1/2;
+        grid-row: 3/4;
+    }
+    #savings{
+        grid-column: 1/2;
+        grid-row: 4/5;
+    }
 }
-.active_modify{
-    grid-column: 1/2;
-    grid-row: 7/8;
-    @include buttons;
-    padding: 8px !important;
-    margin: 2px;
-    text-align: center;
-}
-.modify_action{
-    grid-column: 2/3;
-    grid-row: 7/8;
-}
-.delete_card_c{
-    grid-column: 3/4;
-    grid-row: 7/8;
-    background-color: u.$warning !important;
-    &:hover{
-        background-color: u.$warning !important;
+@media (max-width: 724px){
+    #print_cards{
+        grid-template-columns: auto;
+        grid-template-rows: repeat(6, auto);
+    }
+    $i: 1;
+    @each $title in $titles{
+        #title_#{$title}{
+            grid-column: 1/2;
+            grid-row: #{$i}/#{$i+1};
+        }
+        ##{$title}{
+            grid-column: 1/2;
+            grid-row: #{$i+1}/#{$i+2};
+        }
+        $i: $i+2;
     }
 }

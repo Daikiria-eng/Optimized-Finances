@@ -27,8 +27,11 @@
             <div class="utilities" id="user_utilities">
                 <h2>${sessionScope.usuario}</h2 ><br/>
                 <ol id="user_items">
-                    <a href="metas_Objetivos.jsp"><li>Metas</li></a>
+                    <a href="metas_Objetivos.jsp"><li>Egresos</li></a>
+                    <a href="stadisticas.jsp"><li>Estadísticas</li></a>
                     <a href="consejos.jsp"><li>Consejos</li></a>
+                    <hr/>
+                    <a href="usuario.jsp"><li>Ver perfil</li></a>
                     <hr/>
                     <a href="${pageContext.request.contextPath}/Logout"><li>Cerrar sesión</li></a>
                 </ol>
