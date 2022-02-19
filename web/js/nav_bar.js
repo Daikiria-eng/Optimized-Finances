@@ -4,7 +4,7 @@ let nav=`
     </a>
     <input id="nav_deploy" type="checkbox" />
     <ul>
-        <a href="stadisticas.jsp"><li>Estadísticas</li></a>
+        <a href="sumario.jsp"><li>Sumario</li></a>
         <a href="usuario.jsp"><li>Dinero</li></a>
         <a href="metas_Objetivos.jsp"><li>Egresos</li></a>
         <a href="consejos.jsp"><li>Consejos</li></a>

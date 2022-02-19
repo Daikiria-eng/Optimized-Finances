@@ -184,6 +184,20 @@ input[type=submit] {
   padding: 8px !important;
 }
 
+button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  color: white;
+  background-color: #1a2537;
+  border-radius: 5px;
+}
+button:hover {
+  cursor: pointer;
+  background: #004c8a;
+  color: white;
+}
+
 .delete_action {
   background-color: rgba(255, 0, 0, 0.5) !important;
 }

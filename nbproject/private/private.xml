@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/daykiria/Documentos/NetBeansProjects/Optimized-Finances/src/java/Modelo/Gestion_Acciones/AccionesJDBC.java</file>
-            <file>file:/home/daykiria/Documentos/NetBeansProjects/Optimized-Finances/web/ver_acciones.jsp</file>
-            <file>file:/home/daykiria/Documentos/NetBeansProjects/Optimized-Finances/web/metas_Objetivos.jsp</file>
-            <file>file:/home/daykiria/Documentos/NetBeansProjects/Optimized-Finances/src/java/Modelo/Pool_Conexiones/Conexion.java</file>
-            <file>file:/home/daykiria/Documentos/NetBeansProjects/Optimized-Finances/src/java/Controlador/Controlador_GestionAcc/Controlador2.java</file>
+            <file>file:/home/daykiria/Documentos/NetBeansProjects/Optimized-Finances/src/java/Modelo/Gestion_Consejos/ListaConsejos.java</file>
+            <file>file:/home/daykiria/Documentos/NetBeansProjects/Optimized-Finances/web/consejos.jsp</file>
+            <file>file:/home/daykiria/Documentos/NetBeansProjects/Optimized-Finances/src/java/Modelo/Gestion_Consejos/Nodo.java</file>
+            <file>file:/home/daykiria/Documentos/NetBeansProjects/Optimized-Finances/web/sumario.jsp</file>
+            <file>file:/home/daykiria/Documentos/NetBeansProjects/Optimized-Finances/web/ppal.jsp</file>
         </group>
     </open-files>
 </project-private>

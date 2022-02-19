@@ -2,6 +2,7 @@ package Controlador.Controlador_GestionUsers;
 
 import Modelo.*;
 import Modelo.Gestion_Salario.*;
+import Modelo.Gestion_Acciones.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 /*import javax.servlet.ServletException;
@@ -52,6 +53,7 @@ public class Controlador extends HttpServlet {
             case "Iniciar":{
                 Usuario p=new Usuario();
                 Salario s=new Salario();
+                AccionesJDBC acc_op=new AccionesJDBC();
                 String correo=request.getParameter("correo");
                 String clave=request.getParameter("clave");
                 //String[] salario_v={};
@@ -77,8 +79,17 @@ public class Controlador extends HttpServlet {
                         if(salario_v!=null){
                             request.getSession().setAttribute("salario_actual", salario_v[0]);
                             request.getSession().setAttribute("salario_periodo", salario_v[1]);
+                            
+                            p.setIdCliente(user_name[0]);
+                            String[][] metas_v=acc_op.get_metas(p);
+                            String[][] ahorros_v=acc_op.get_ahorros(p);
+                            String[][] gastos_v=acc_op.get_gastos(p);
+                            request.getSession().setAttribute("vector_metas", metas_v);
+                            request.getSession().setAttribute("vector_ahorros", ahorros_v);
+                            request.getSession().setAttribute("vector_gastos", gastos_v);
+                            
                             response.sendRedirect("ppal.jsp");
-                        }else{response.sendRedirect("salario.jsp");}
+                        }
                     } else {response.sendRedirect(request.getContextPath()+"/Login.jsp");}
                 } catch (IOException | ClassNotFoundException e) {
                     System.out.println("Error al iniciar sesión:\n"+e);

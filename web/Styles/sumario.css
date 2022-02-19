@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(90deg, #020024 4%, #090979 13%, #00d4ff 67%);
+}
+
+#corpse {
+  margin: 10px;
+  padding: 7px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+#stats {
+  background: rgba(255, 255, 255, 0.45);
+  margin: 2px;
+  padding: 7px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+}
+#stats_titles {
+  margin: 2px 5px;
+  display: flex;
+  flex-direction: column;
+}
+#stats_values {
+  margin: 2px 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+hr {
+  heigth: 2px;
+  width: 100%;
+  color: #1a2537;
+  background: #1a2537;
+}
+
+/*# sourceMappingURL=sumario.css.map */

@@ -97,14 +97,82 @@ public class Controlador2 extends HttpServlet {
                 break;
             }
             
-            case "Eliminar":{
+            case "Eliminar meta":{
                 Acciones acc=new Acciones();
                 String id_accion=(String) request.getParameter("id_accion");
-                String[] nombre=id_accion.split("_");
-                acc.setTipo_Acciones(nombre[1]);
                 acc.setId_Acciones(id_accion);
-                acc_op.eliminar_accion(acc);
-            }break;
+                if(acc_op.eliminar_meta(acc))
+                    response.sendRedirect("metas_Objetivos.jsp");
+                else
+                    response.sendRedirect("ppal.jsp");
+                break;
+            }
+            
+            case "Eliminar gasto":{
+                Acciones acc=new Acciones();
+                String id_accion=(String) request.getParameter("id_accion");
+                acc.setId_Acciones(id_accion);
+                if(acc_op.eliminar_gasto(acc))
+                    response.sendRedirect("metas_Objetivos.jsp");
+                else
+                    response.sendRedirect("ppal.jsp");
+                break;
+            }
+            
+            case "Eliminar ahorro":{
+                Acciones acc=new Acciones();
+                String id_accion=(String) request.getParameter("id_accion");
+                acc.setId_Acciones(id_accion);
+                if(acc_op.eliminar_ahorro(acc))
+                    response.sendRedirect("metas_Objetivos.jsp");
+                else
+                    response.sendRedirect("ppal.jsp");
+                break;
+            }
+            
+            case "Modificar meta":{
+                Acciones acc=new Acciones();
+                String id_accion=(String) request.getParameter("id_accion");
+                acc.setId_Acciones(id_accion);
+                acc.setTitulo((String) request.getParameter("titulo"));
+                acc.setValor((String) request.getParameter("precio"));
+                acc.setFecha_Final((String) request.getParameter("fecha_final"));
+                
+                if(acc_op.modificar_meta(acc))
+                    response.sendRedirect("ver_acciones.jsp");
+                else
+                    response.sendRedirect("ppal.jsp");
+                break;
+            }
+            case "Modificar gasto":{
+                Acciones acc=new Acciones();
+                String id_accion=(String) request.getParameter("id_accion");
+                acc.setId_Acciones(id_accion);
+                acc.setTitulo((String) request.getParameter("titulo"));
+                acc.setValor((String) request.getParameter("precio"));
+                acc.setFecha_Final((String) request.getParameter("fecha_final"));
+                
+                if(acc_op.modificar_gasto(acc))
+                    response.sendRedirect("ver_acciones.jsp");
+                else
+                    response.sendRedirect("ppal.jsp");
+                break;
+            }
+            case "Modificar ahorro":{
+                Acciones acc=new Acciones();
+                String id_accion=(String) request.getParameter("id_accion");
+                acc.setId_Acciones(id_accion);
+                acc.setTitulo((String) request.getParameter("titulo"));
+                acc.setValor((String) request.getParameter("precio"));
+                acc.setFecha_Inicio((String) request.getParameter("fecha_inicio"));
+                acc.setFecha_Final((String) request.getParameter("fecha_final"));
+                
+                if(acc_op.modificar_ahorro(acc))
+                    response.sendRedirect("ver_acciones.jsp");
+                else
+                    response.sendRedirect("ppal.jsp");
+                break;
+            }
             default:
                 //throw new AssertionError();
                 break;

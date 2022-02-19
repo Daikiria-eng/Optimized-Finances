@@ -19,6 +19,7 @@ input{
         padding: 8px !important; 
     }
 }
+button{@include buttons;}
 .delete_action{
     background-color: v.$warning !important;
     &:hover{

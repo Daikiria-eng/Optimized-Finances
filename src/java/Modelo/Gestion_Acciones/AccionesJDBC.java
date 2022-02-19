@@ -18,8 +18,13 @@ public class AccionesJDBC implements Validar_Usuario{
     private final String sql_get_ahorros="SELECT id_ahorro,titulo,valor,fecha_inicio,fecha_final FROM ahorros WHERE id_usuario=";
     private final String sql_get_gastos="SELECT id_gasto,titulo,precio,fecha_final FROM gastos WHERE id_usuario=";
     
-    private final String sql_delete_accion="DELTE FROM ? WEHRE ?=?;";
+    private final String sql_delete_meta="DELETE FROM metas WHERE id_meta=?;";
+    private final String sql_delete_gasto="DELETE FROM gastos WHERE id_gasto=?;";
+    private final String sql_delete_ahorro="DELETE FROM ahorros WHERE id_ahorro=?;";
 
+    private final String sql_update_meta="UPDATE metas SET titulo=?, precio=?, fecha_final=? WHERE id_meta=?";
+    private final String sql_update_gasto="UPDATE gastos SET titulo=?, precio=?, fecha_final=? WHERE id_gasto=?";
+    private final String sql_update_ahorro="UPDATE ahorros SET titulo=?, valor=?, fecha_inicio=?, fecha_final=? WHERE id_ahorro=?";
     public boolean insertar_meta(Acciones acc){
         Connection conn=null;
         PreparedStatement ps=null;
@@ -72,7 +77,6 @@ public class AccionesJDBC implements Validar_Usuario{
     public boolean insertar_ahorro(Acciones acc){
         Connection conn=null;
         PreparedStatement ps=null;
-        //(titulo,valor,fecha_inicio,fecha_final,id_usuario)
         int rows=0;
         try {
             conn=Conexion.getConnection();
@@ -94,17 +98,62 @@ public class AccionesJDBC implements Validar_Usuario{
         return false;
     }
     
-    public boolean eliminar_accion(Acciones acc){
+    public boolean eliminar_meta(Acciones acc){
+        Connection conn=null;
+        PreparedStatement ps=null;
+        int rows=0,id=0;
+        try {
+            conn=Conexion.getConnection();
+            ps=conn.prepareStatement(sql_delete_meta);
+            id=Integer.valueOf(acc.getId_Acciones());
+            ps.setInt(1, id);
+            rows=ps.executeUpdate();
+            
+            return rows!=0;
+        } catch (Exception e) {
+            System.out.println("Error al eliminar meta:\n"+e);
+        } finally {
+            Conexion.close(conn);
+            Conexion.close(ps);
+        }
+        
+        return false;
+    }
+    
+    public boolean eliminar_gasto(Acciones acc){
         Connection conn=null;
         PreparedStatement ps=null;
         int rows=0;
         try {
             conn=Conexion.getConnection();
-            String[] nombre
-            ps=conn.prepareStatement(sql_delete_accion);
+            ps=conn.prepareStatement(sql_delete_gasto);
+            ps.setString(1, acc.getId_Acciones());
+            rows=ps.executeUpdate();
             
+            return rows!=0;
         } catch (Exception e) {
-            System.out.println("Error al eliminar accion:\n"+e);
+            System.out.println("Error al eliminar gasto:\n"+e);
+        } finally {
+            Conexion.close(conn);
+            Conexion.close(ps);
+        }
+        
+        return false;
+    }
+    
+    public boolean eliminar_ahorro(Acciones acc){
+        Connection conn=null;
+        PreparedStatement ps=null;
+        int rows=0;
+        try {
+            conn=Conexion.getConnection();
+            ps=conn.prepareStatement(sql_delete_ahorro);
+            ps.setString(1, acc.getId_Acciones());
+            rows=ps.executeUpdate();
+            
+            return rows!=0;
+        } catch (Exception e) {
+            System.out.println("Error al eliminar ahorro:\n"+e);
         } finally {
             Conexion.close(conn);
             Conexion.close(ps);
@@ -150,6 +199,82 @@ public class AccionesJDBC implements Validar_Usuario{
         }
     
         return null;
+    }
+    
+    public boolean modificar_meta(Acciones acc){
+        Connection conn=null;
+        PreparedStatement ps=null;
+        int rows=0;
+        try {
+            conn=Conexion.getConnection();
+            ps=conn.prepareStatement(sql_update_meta);
+            ps.setString(1, acc.getTitulo());
+            ps.setString(2, acc.getValor());
+            ps.setString(3, acc.getFecha_Final());
+            ps.setString(4, acc.getId_Acciones());
+            rows=ps.executeUpdate();
+            
+            return rows!=0;
+        } catch (Exception e) {
+            System.out.println("Error al modificar meta:\n"+e);
+            e.printStackTrace();
+        } finally {
+            Conexion.close(conn);
+            Conexion.close(ps);
+        }
+        return false;
+    }
+    
+    public boolean modificar_gasto(Acciones acc){
+        Connection conn=null;
+        PreparedStatement ps=null;
+        int rows=0;
+        try {
+            conn=Conexion.getConnection();
+            ps=conn.prepareStatement(sql_update_gasto);
+            ps.setString(1, acc.getTitulo());
+            ps.setString(2, acc.getValor());
+            ps.setString(3, acc.getFecha_Final());
+            ps.setString(4, acc.getId_Acciones());
+            rows=ps.executeUpdate();
+            
+            return rows!=0;
+        } catch (Exception e) {
+            System.out.println("Error al modificar gasto:\n"+e);
+            e.printStackTrace();
+        } finally {
+            Conexion.close(conn);
+            Conexion.close(ps);
+        }
+        
+        return false;
+    }
+    
+    public boolean modificar_ahorro(Acciones acc){
+        Connection conn=null;
+        PreparedStatement ps=null;
+        int rows=0;
+        try {
+            conn=Conexion.getConnection();
+            ps=conn.prepareStatement(sql_update_ahorro);
+            ps.setString(1, acc.getTitulo());
+            ps.setString(2, acc.getValor());
+            ps.setString(3, acc.getFecha_Inicio());
+            ps.setString(4, acc.getFecha_Final());
+            ps.setString(5, acc.getId_Acciones());
+            rows=ps.executeUpdate();
+            
+            return rows!=0;
+        } catch (Exception e) {
+            System.out.println("Error al modificar ahorro:\n"+e);
+            e.printStackTrace();
+            e.printStackTrace();
+        } finally {
+            Conexion.close(conn);
+            Conexion.close(ps);
+        }
+        
+        return false;
     }
     
     public String[][] get_ahorros(Usuario u){

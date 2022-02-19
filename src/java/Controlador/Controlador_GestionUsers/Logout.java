@@ -23,7 +23,9 @@ public class Logout extends HttpServlet {
         request.getSession().removeAttribute("usuario");
         request.getSession().removeAttribute("salrio_actual");
         request.getSession().removeAttribute("id_accion_v");
-        request.getSession().removeAttribute("vector_acciones");
+        request.getSession().removeAttribute("vector_metas");
+        request.getSession().removeAttribute("vector_ahorros");
+        request.getSession().removeAttribute("vector_gastos");
         request.getSession().invalidate();
 
         response.sendRedirect(request.getContextPath()+"/Index.jsp");

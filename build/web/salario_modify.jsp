@@ -20,6 +20,7 @@
                 <input 
                     type="number" id="input_salary" 
                     placeholder="Ingrese su salario" 
+                    value="<%out.print(request.getSession().getAttribute("salario_valor"));%>"
                     name="valor"
                     required
                 />
@@ -30,7 +31,7 @@
                     type="number" id="salary_days"
                     placeholder="Ingrese período de pago"
                     name="periodo"
-                    value=<%out.print(request.getSession().getAttribute("salario_periodo"));%>
+                    value="<%out.print(request.getSession().getAttribute("salario_periodo"));%>"
                     required
                 />
                 <label for="current_salary_in">
@@ -40,7 +41,7 @@
                     type="number" id="current_salary_in"
                     placeholder="$ su salario actual"
                     name="salario_actual"
-                    value=<%out.print(request.getSession().getAttribute("salario_actual"));%>
+                    value="<%out.print(request.getSession().getAttribute("salario_actual"));%>"
                     required
                 />
                 <input 

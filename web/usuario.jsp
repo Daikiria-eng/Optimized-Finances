@@ -50,7 +50,7 @@
             </div>
             <div id="user_stats">
                 <div id="cash_div">
-                    <h1 id="my_cash"><i>Su dinero: $</i> ${sessionScope.salario_actual} <strong id="cash"></strong></h1>
+                    <h1 id="my_cash"><i>Su dinero: </i> $<%out.print(salario);%> <strong id="cash"></strong></h1>
                     <div id="prev_subtract_label">
                         <label for="prev_subtract">                    
                             <i class="arrow" id="prev_subtract_arrow"></i>

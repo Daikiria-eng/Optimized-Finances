@@ -54,6 +54,7 @@
                             class="goal_title" 
                             name="titulo"
                             placeholder="Título de la meta"
+                            required
                         />
                         <input 
                             id="price_goal"
@@ -61,6 +62,7 @@
                             class="goal_price"
                             placeholder="Ingrese el valor de la meta"
                             name="meta_valor"
+                            required
                         />
                         <input 
                             id="date_goal"
@@ -68,6 +70,7 @@
                             class="goal_date"
                             value=""
                             name="meta_fecha"
+                            required
                         />
                         <input 
                             type="submit"
@@ -100,6 +103,7 @@
                             class="expend_title" 
                             name="titulo"
                             placeholder="Título del gasto"
+                            required
                         />
                         <input 
                             id="price_expend"
@@ -107,11 +111,13 @@
                             class="expend_price"
                             placeholder="Ingrese el valor del gasto"
                             name="meta_valor"
+                            required
                         />
                         <input
                             type="date" name="fecha_gasto"
                             id="date_expend"
                             class="expend_date"
+                            required
                         />
                         <input 
                             type="submit"
@@ -147,6 +153,7 @@
                             class="saving_title" 
                             name="titulo"
                             placeholder="Título del ahorro"
+                            required
                         />
                         <input 
                             id="price_saving"
@@ -154,6 +161,7 @@
                             class="saving_price"
                             placeholder="Ingrese el valor del ahorro"
                             name="meta_valor"
+                            required
                         />
                         <input 
                             id="date_saving"
@@ -161,6 +169,7 @@
                             class="saving_date"
                             value=""
                             name="ahorro_fecha"
+                            required
                         />
                         <input 
                             id="date_saving_end"
@@ -168,6 +177,7 @@
                             class="saving_date_end"
                             value=""
                             name="ahorro_fecha_final"
+                            required
                         />
                         <input 
                             type="submit"

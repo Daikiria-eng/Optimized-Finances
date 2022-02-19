@@ -6,8 +6,8 @@ package Modelo.Gestion_Acciones;
  */
 public class Nodo {
     public String
-            id_acciones,
-            tipo_acciones,
+            id_accion,
+            tipo_accion,
             titulo,
             fecha_inicio,
             fecha_final,

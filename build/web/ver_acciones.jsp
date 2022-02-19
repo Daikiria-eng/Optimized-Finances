@@ -17,6 +17,12 @@
     String[][] metas_v=acc_op.get_metas(u);
     String[][] ahorros_v=acc_op.get_ahorros(u);
     String[][] gastos_v=acc_op.get_gastos(u);
+    request.getSession().setAttribute("vector_metas", metas_v);
+    request.getSession().setAttribute("vector_ahorros", ahorros_v);
+    request.getSession().setAttribute("vector_gastos", gastos_v);
+    
+    ListaAcciones la=new ListaAcciones(metas_v,gastos_v,ahorros_v);
+    la.llenar_acciones();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,24 +45,25 @@
                 <div class="actions" id="goals">
                     <%
                         if(metas_v==null){
-                            out.print("<h3>Aún no has regitrado ninguna meta</h3>");
+                            out.print("<h3>Aún no has registrado ninguna meta</h3>");
                         }else{
                             for (int i=0;i<metas_v.length;i++){
                     %>                        
-                                <form class="action_form">
+                                <form class="action_form" method="POST" action="Controlador2">
                                     <div class="labels">
                                         <label>Titulo</label>
                                         <label>Precio</label>
                                         <label>Fecha final</label>
                                     </div>
                                     <div class="inputs">
+                                        <input type="hidden" name="tipo_accion" value="meta"/>
                                         <input type="hidden" name="id_accion" value="<%out.print(metas_v[i][0]);%>"/>
-                                        <input type="text" value="<%out.print(metas_v[i][1]);%>"/>
-                                        <input type="number" value="<%out.print(metas_v[i][2]);%>"/>
-                                        <input type="date" value="<%out.print(metas_v[i][3]);%>"/>
+                                        <input type="text" name="titulo" value="<%out.print(metas_v[i][1]);%>"/>
+                                        <input type="number" name="precio" value="<%out.print(metas_v[i][2]);%>"/>
+                                        <input type="date" name="fecha_final" value="<%out.print(metas_v[i][3]);%>"/>
                                         <div class="submits">
-                                            <input class="delete_action" type="submit" value="Eliminar"/>
-                                            <input type="submit" value="Modificar"/>
+                                            <input class="delete_action" name="accion" type="submit" value="Eliminar meta"/>
+                                            <input type="submit" name="accion" value="Modificar meta"/>
                                         </div>
                                     </div>
                                 </form>
@@ -68,24 +75,25 @@
                 <div class="actions" id="expends">
                     <%
                         if(gastos_v==null){
-                            out.print("<h3>Aún no has regitrado ninguna meta</h3>");
+                            out.print("<h3>Aún no has registrado ningún gasto</h3>");
                         }else{
                             for (int i=0;i<gastos_v.length;i++){
                     %>                        
-                                <form class="action_form">
+                                <form class="action_form" method="POST" action="Controlador2">
                                     <div class="labels">
                                         <label>Titulo</label>
                                         <label>Precio</label>
                                         <label>Fecha final</label>
                                     </div>
                                     <div class="inputs">
+                                        <input type="hidden" name="tipo_accion" value="gasto"/>
                                         <input type="hidden" name="id_accion" value="<%out.print(gastos_v[i][0]);%>"/>
-                                        <input type="text" value="<%out.print(gastos_v[i][1]);%>"/>
-                                        <input type="number" value="<%out.print(gastos_v[i][2]);%>"/>
-                                        <input type="date" value="<%out.print(gastos_v[i][3]);%>"/>
+                                        <input type="text" name="titulo" value="<%out.print(gastos_v[i][1]);%>"/>
+                                        <input type="number" name="precio" value="<%out.print(gastos_v[i][2]);%>"/>
+                                        <input type="date" name="fecha_final" value="<%out.print(gastos_v[i][3]);%>"/>
                                         <div class="submits">
-                                            <input class="delete_action" type="submit" value="Eliminar"/>
-                                            <input type="submit" value="Modificar"/>
+                                            <input class="delete_action" name="accion" type="submit" value="Eliminar gasto"/>
+                                            <input type="submit" name="accion" value="Modificar gasto"/>
                                         </div>
                                     </div>
                                 </form>
@@ -97,11 +105,11 @@
                 <div class="actions" id="savings">
                     <%
                         if(ahorros_v==null){
-                            out.print("<h3>Aún no has regitrado ninguna meta</h3>");
+                            out.print("<h3>Aún no has registrado ningún ahorro</h3>");
                         }else{
                             for (int i=0;i<ahorros_v.length;i++){
                     %>                        
-                                <form class="action_form">
+                                <form class="action_form" method="POST" action="Controlador2">
                                     <div class="labels">
                                         <label>Titulo</label>
                                         <label>Precio</label>
@@ -109,14 +117,15 @@
                                         <label>Fecha final</label>
                                     </div>
                                     <div class="inputs">
+                                        <input type="hidden" name="tipo_accion" value="ahorro"/>
                                         <input type="hidden" name="id_accion" value="<%out.print(ahorros_v[i][0]);%>"/>
-                                        <input type="text" value="<%out.print(ahorros_v[i][1]);%>"/>
-                                        <input type="number" value="<%out.print(ahorros_v[i][2]);%>"/>
-                                        <input type="date" value="<%out.print(ahorros_v[i][3]);%>"/>
+                                        <input type="text" name="titulo" value="<%out.print(ahorros_v[i][1]);%>"/>
+                                        <input type="number" name="precio" value="<%out.print(ahorros_v[i][2]);%>"/>
+                                        <input type="date" name="fecha_final" value="<%out.print(ahorros_v[i][3]);%>"/>
                                         <input type="date" value="<%out.print(ahorros_v[i][4]);%>"/>
                                         <div class="submits">
-                                            <input class="delete_action" type="submit" value="Eliminar"/>
-                                            <input type="submit" value="Modificar"/>
+                                            <input class="delete_action" name="accion" type="submit" value="Eliminar ahorro"/>
+                                            <input type="submit" name="accion" value="Modificar ahorro"/>
                                         </div>
                                     </div>
                                 </form>

@@ -101,3 +101,9 @@
     }
 }
 //end of navbar
+@mixin hrs{
+    heigth: 2px;
+    width: 100%;
+    color: v.$backgrounds;
+    background: v.$backgrounds;
+}

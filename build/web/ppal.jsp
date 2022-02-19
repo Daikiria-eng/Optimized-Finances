@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     String user_name=(String)request.getSession().getAttribute("usuario");
-    if(request.getSession().getAttribute("usuario")==null){ 
+    if(request.getSession().getAttribute("usuario")==null){
         response.sendRedirect("Index.jsp");
     }
 %>
